@@ -1,0 +1,18 @@
+\begin{lstlisting}[
+  language=Scala,
+  caption={The core constructs of field calculus, represented as a trait,
+  abstracting over the actual organization within ScaFi.},
+  captionpos=b,
+  label={listing:scafi-field-calculus}
+]
+trait FieldCalculus:
+  def nbr[E](exp: => E): E
+  def rep[E](exp: => E)(evolve: E => E): E
+  def foldhood[E](exp: => E)(accumulate: (E, E) => E)(nbrExp: => E): E
+  def aggregate[E](exp: => E): E
+
+  // platform interactions
+  def mid: Id
+  def sense[V](name: String): V
+  def nbrvar[V](name: String): V
+\end{lstlisting}

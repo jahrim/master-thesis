@@ -1,0 +1,23 @@
+\begin{lstlisting}[
+  language=Scala,
+  caption={An abstract view on the Sodium primitives for constructing static
+  acyclic computational graphs. Some primitives can be derived as a combination
+  of the others.},
+  captionpos=b,
+  label={listing:sodium-basic}
+]
+type Stream[E]
+type Cell[V]
+
+def never[E]: Stream[E]
+def map[A, B](s: Stream[A], mapping: A => B): Stream[B]
+def filter[E](s: Stream[E], predicate: E => Boolean): Stream[E]
+def merge[E](s1: Stream[E], s2: Stream[E], merging: (E, E) => E): Stream[E]
+def snapshot[A, B, C](s: Stream[A], c: Cell[B], combine: (A, B) => C): Stream[C]
+
+def constant[V](value: V): Cell[V]
+def hold[V](s: Stream[V], initial: V): Cell[V]
+def sample[V](c: Cell[V]): V
+def map[A, B](c: Cell[A], mapping: A => B): Cell[B]
+def lift[A, B, C](c1: Cell[A], c2: Cell[B], operator: (A, B) => C): Cell[C]
+\end{lstlisting}

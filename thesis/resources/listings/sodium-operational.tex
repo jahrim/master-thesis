@@ -1,0 +1,13 @@
+\begin{lstlisting}[
+  language=Scala,
+  caption={An abstract view on the Sodium operational primitives.},
+  captionpos=b,
+  label={listing:sodium-operational}
+]
+type StreamSink[E] <: Stream[E]
+type CellSink[V] <: Cell[V]
+def send[E](s: StreamSink[E], event: E): Unit
+def send[V](c: CellSink[V], update: V): Unit
+def listen[E](s: Stream[E], callback: E => Unit): Listener
+def listen[V](s: Cell[V], callback: V => Unit): Listener
+\end{lstlisting}

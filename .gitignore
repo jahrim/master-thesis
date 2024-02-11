@@ -1,3 +1,6 @@
+# latex indent
+.latexindent
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

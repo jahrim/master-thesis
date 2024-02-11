@@ -1,0 +1,10 @@
+\begin{lstlisting}[
+  language=Scala,
+  caption={An abstract view on the Sodium primitives for constructing dynamic
+  computational graphs.},
+  captionpos=b,
+  label={listing:sodium-switching}
+]
+def switchS[E](cs: Cell[Stream[E]]): Stream[E]
+def switchC[V](cc: Cell[Cell[V]]): Cell[V]
+\end{lstlisting}

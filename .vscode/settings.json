@@ -1,3 +1,28 @@
 {
-    "latex-workshop.latex.outDir": "../build",
+  // Build
+  "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build",
+  // Grammar
+  "grammarly.config.documentDialect": "british",
+  "grammarly.config.suggestionCategories.informalPronounsAcademic": "on",
+  "grammarly.files.include": [
+    "**/readme.md",
+    "**/README.md",
+    "**/*.txt",
+    "**/*.tex",
+  ],
+  // Formatting
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.rulers": [
+    80
+  ],
+  "editor.formatOnSave": true,
+  "latex-workshop.latexindent.args": [
+    "-cruft=%WORKSPACE_FOLDER%/.latexindent/",
+    "-local=%WORKSPACE_FOLDER%/latexindent.yaml",
+    "-modifylinebreaks",
+    "--overwriteIfDifferent",
+    "%TMPFILE%"
+  ]
 }
