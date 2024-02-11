@@ -3,5 +3,4 @@
 This is my thesis for the final exam of the Master in Computer Science and
 Engineering 2022-2023.
 
-You can download the document in `.pdf` format from the `./build` directory of
-this repository.
+[Download Latest Release](https://github.com/jahrim/master-thesis/releases/latest/download/master-thesis.pdf)
