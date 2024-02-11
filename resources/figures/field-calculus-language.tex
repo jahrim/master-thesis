@@ -1,0 +1,34 @@
+% ! TeX root = ../../master-thesis.tex
+
+\begin{figure}
+  \centering
+  \noindent\fbox{
+    \begin{minipage}{0.95\textwidth}
+      \begin{align*}
+        P \quad\Rightarrow\quad    & F^*e                                 & \textit{Program}              &                                                      \\
+        F \quad\Rightarrow\quad    & \texttt{def } d(x^*)\{e\}            & \textit{Function Declaration} &                                                      \\
+        e \quad\Rightarrow\quad    & x                                    & \textit{Expression}           & : \textit{Variable}                                  \\
+        \quad|\quad                & v                                    &                               & : \textit{Value}                                     \\
+        \quad|\quad                & f(e^*)                               &                               & : \textit{Function Call}                             \\
+        \quad|\quad                & \texttt{nbr}\{e\}                    &                               & : \textit{Evolution over space}                      \\
+        \quad|\quad                & \texttt{rep}(e)\{(x) \rightarrow e\} &                               & : \textit{Evolution over time}                       \\
+        \quad|\quad                & \texttt{if}(e)\{e\}\{e\}             &                               & : \textit{Restriction}                               \\
+        f \quad\Rightarrow\quad    & d                                    & \textit{Function Name}        & : \textit{User-declared}                             \\
+        \quad|\quad                & b                                    &                               & : \textit{Built-in}                                  \\
+        v \quad\Rightarrow\quad    & l                                    & \textit{Value}                & : \textit{Local Value}                               \\
+        \quad|\quad                & \phi                                 &                               & : \textit{Neighboring Value}                         \\
+        l \quad\Rightarrow\quad    & \texttt{c}(l^*)                      & \textit{Local Value}          & : \textit{Constructor Call}                          \\
+        \phi \quad\Rightarrow\quad & \delta^* \rightarrow l^*             & \textit{Neighboring Value}    & : \textit{Devices} \rightarrow \textit{Local Values} \\
+      \end{align*}
+    \end{minipage}
+  }
+  \caption{
+  An abstract syntax for field calculus \cite{FieldCalculus-AggregateComputing}.
+  The symbol $a^*$ indicates a possibly empty sequence of $a$ (e.g.
+  $a_1,...,a_n$ with $n \geq 0$), while the symbol $a^*{\rightarrow}b^*$ a
+  possibly empty sequence of relations $a_1{\rightarrow}b_1,...,a_n{\rightarrow}b_n$.
+  On the left, the production rules of the language. On the right, the
+  meaning of the left and right side of each production rule.
+  }
+  \label{figure:field-calculus-language}
+\end{figure}

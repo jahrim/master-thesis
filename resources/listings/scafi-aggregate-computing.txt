@@ -1,0 +1,12 @@
+trait AggregateComputing:
+  self: FieldCalculus =>
+  // aggregate computing blocks
+  def G[V](source: Boolean, initial: V, accum: V => V, metric: () => Double): V
+  def C[P: Bounded, V](potential: P, accum: (V, V) => V, local: V, nullV: V): V
+  def T[V: Numeric](initial: V, floor: V, decay: V => V): V
+  def S(grain: Double, metric: () => Double): Boolean
+
+  // derived operators
+  def branch[E](cond: => E)(th: => E)(el: => E): E
+  def mux[E](cond: => E)(th: => E)(el: => E): E
+  def share[E](exp: => E)(evolve: (E, () => E) => E): E

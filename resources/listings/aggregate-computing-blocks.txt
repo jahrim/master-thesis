@@ -1,0 +1,3 @@
+def G(source, initial)(metric, accumulator){...}
+def C(potential, local, null)(accumulator){...}
+def T(initial, final)(decay){...}

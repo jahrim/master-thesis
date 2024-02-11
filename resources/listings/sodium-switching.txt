@@ -1,0 +1,2 @@
+def switchS[E](cs: Cell[Stream[E]]): Stream[E]
+def switchC[V](cc: Cell[Cell[V]]): Cell[V]

@@ -1,0 +1,30 @@
+% ! TeX root = ../../../master-thesis.tex
+
+\subsection{Functional Reactive Programming}
+
+\textbf{\ac{FRP}} is a subset of both reactive programming and
+\textbf{functional programming}, retaining the advantages of reactive
+programming, while promoting \textbf{compositionality}, which is a
+property of semantics, holding if the meaning of an expression is solely
+determined by the meaning of its parts and the rules used to combine them
+\cite{FRP}.
+
+In functional programming, compositionality is achieved by expressing software
+behaviors as \textbf{pure functions}, that is functions in the mathematical
+sense of the term. Pure functions produce no observable side effects when
+applied and are \textbf{referentially transparent}, meaning that different
+applications of a function to the same input always produce the same outputs.
+To attain referential transparence, functions should avoid referencing
+\textit{shared mutable data} so that their behavior is constant since their
+definition and has no side effects.
+
+In reactive programming, compositionality also requires glitch freedom, as
+observable glitches may invalidate the behavior expressed by a function (e.g.
+the behavior of a function may change due to inconsistent handling of
+simultaneous events by the underlying evaluation model).
+
+Compositionality is essential for dealing with complex software, tackling its
+complexity by composition of simpler components that are easier to reason
+about. Moreover, it deals with scalable software, tackling their growing
+complexity over time by facilitating the addition of new features to existing
+composable applications.

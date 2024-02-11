@@ -3,6 +3,7 @@
   "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build",
   // Grammar
   "grammarly.config.documentDialect": "british",
+  "grammarly.config.documentDomain": "academic",
   "grammarly.config.suggestionCategories.informalPronounsAcademic": "on",
   "grammarly.files.include": [
     "**/readme.md",

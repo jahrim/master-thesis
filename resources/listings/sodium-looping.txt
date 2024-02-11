@@ -1,0 +1,6 @@
+type StreamLoop[E] <: Stream[E]
+type CellLoop[E] <: Cell[E]
+def streamLoop[E]: StreamLoop[E]
+def loop[E](reference: StreamLoop[E], value: Stream[E]): Stream[E]
+def cellLoop[E]: CellLoop[E]
+def loop[V](reference: CellLoop[V], value: Cell[V]): Stream[V]

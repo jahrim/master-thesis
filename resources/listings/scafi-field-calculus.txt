@@ -1,0 +1,10 @@
+trait FieldCalculus:
+  def nbr[E](exp: => E): E
+  def rep[E](exp: => E)(evolve: E => E): E
+  def foldhood[E](exp: => E)(accumulate: (E, E) => E)(nbrExp: => E): E
+  def aggregate[E](exp: => E): E
+
+  // platform interactions
+  def mid: Id
+  def sense[V](name: String): V
+  def nbrvar[V](name: String): V

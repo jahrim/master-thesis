@@ -1,0 +1,76 @@
+% ! TeX root = ../../master-thesis.tex
+
+\chapter{Introduction}
+\label{chapter:introduction}
+
+This chapter provides a summary of the content and organization of this thesis,
+describing the context, motivations and high-level goals of this project and
+how they are presented in this document.
+
+\section{Content}
+
+The ever-increasing availability of devices is creating an emerging class of
+distributed systems, called collective adaptive systems, with application
+domains such as smart cities, complex sensor networks and the \ac{IoT}
+\cite{CAS-AggregateComputingBlocks}. The complexity of these systems calls for
+new programming paradigms better suited for large-scale distributed systems,
+such as aggregate computing \cite{FieldCalculus-AggregateComputing}.
+
+Most state-of-the-art aggregate computing frameworks rely on a round-based
+computation model, which is simple, but limited in terms of flexibility and
+efficiency. To provide for the shortcomings of the round-based computation
+model, new reactive approaches are currently in research, such as the FRASP
+library \cite{FRASP}, which is the subject of this work.
+
+FRASP provides a novel domain-specific language for combining the functional
+reactive programming paradigm with the aggregate computing paradigm, extending
+the former to be applied in distributed systems and in particular in collective
+adaptive systems, while also extending the latter with a reactive computation
+model, replacing the typical round-based one.
+
+At the time of writing, FRASP is a research project and there are many ideas,
+challenges and features still to be explored. However, the library requires a
+consolidated test suite before further evolution, to assess the correctness of
+its current implementation and prevent possible software regressions, that may
+be due to unsuspected interactions between present and future features.
+
+The main goal of this thesis is to implement a validated version of the FRASP
+library, providing a clearer definition of its functionalities, verified
+through adequate unit tests. Properties concerning FRASP programs will be
+mainly evaluated via simulation, requiring a thorough analysis and validation
+of the current simulator as well.
+
+\section{Structure}
+
+The content of the thesis will be presented in detail in the following
+chapters.
+
+First, Chapter \ref{chapter:background} provides an overview of the main
+concepts and technologies used in this project, so that this document may be
+self-contained.
+
+\sidenote{TODO: describe other chapters...}
+
+\section{Style}
+
+The writing style adopted within this document provides intentional meaning to
+the font styles used in words or sentences. Here follows a comprehensive list
+of such font styles and their meanings:
+
+\begin{itemize}
+  \item \textit{Italic}: used to draw the reader's attention towards certain
+        words or sentences.
+  \item \textbf{Bold}: used to introduce a new concept that has never been
+        mentioned before in the document.
+  \item \texttt{Monospace}: used to reference an existing concept in the source
+        code of the project.
+\end{itemize}
+
+\section{Prerequisites}
+
+The following chapters may contain references to concepts related to
+object-orient\-ed and functional programming, assuming that the reader is
+familiar with such paradigms (specifically the Java \cite{Java} and Scala
+\cite{Scala} documentations). Indeed, Scala has been adopted as the language of
+choice in this document for abstracting over software interfaces and writing
+pseudo-code, due to its clean and minimalistic functional syntax.
