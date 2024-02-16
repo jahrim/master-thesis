@@ -1,12 +1,13 @@
 trait FraspLanguage:
   // field calculus
   type Flow[V]
-  def constant[V](value: V): Flow[V]
-  def lift[A, B, C](a: Flow[A], b: Flow[B])(operator: (A, B) => C): Flow[C]
   def loop[V](init: V)(evolve: Flow[V] => Flow[V]): Flow[V]
   def nbr[V](cond: Flow[Boolean])(th: Flow[V])(el: Flow[V])
     : Flow[NeighboringValue[V]]
   def branch[V](cond: Flow[Boolean])(th: Flow[V])(el: Flow[V]): Flow[V]
+  def constant[V](value: V): Flow[V]
+  def lift[A, B](a: Flow[A])(operator: A => B): Flow[B]
+  def lift[A, B, C](a: Flow[A], b: Flow[B])(operator: (A, B) => C): Flow[C]
 
   // platform interactions
   def mid: Flow[DeviceId]

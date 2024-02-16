@@ -3,11 +3,12 @@
 \chapter{Introduction}
 \label{chapter:introduction}
 
-This chapter provides a summary of the content and organization of this thesis,
+This chapter provides a summary of the content and organisation of this thesis,
 describing the context, motivations and high-level goals of this project and
 how they are presented in this document.
 
 \section{Content}
+\label{section:introduction:content}
 
 The ever-increasing availability of devices is creating an emerging class of
 distributed systems, called collective adaptive systems, with application
@@ -29,29 +30,35 @@ adaptive systems, while also extending the latter with a reactive computation
 model, replacing the typical round-based one.
 
 At the time of writing, FRASP is a research project and there are many ideas,
-challenges and features still to be explored. However, the library requires a
+challenges, and features still to be explored. However, the library requires a
 consolidated test suite before further evolution, to assess the correctness of
-its current implementation and prevent possible software regressions, that may
-be due to unsuspected interactions between present and future features.
+its current implementation, prevent possible software regressions, that may be
+due to unsuspected interactions between present and future features, and
+possibly discover unforeseen implications of the reactive model.
 
 The main goal of this thesis is to implement a validated version of the FRASP
 library, providing a clearer definition of its functionalities, verified
-through adequate unit tests. Properties concerning FRASP programs will be
-mainly evaluated via simulation, requiring a thorough analysis and validation
-of the current simulator as well.
+through adequate testing. Properties concerning FRASP programs will be mainly
+evaluated via simulation, requiring a thorough analysis and validation of the
+current simulator as well.
 
 \section{Structure}
+\label{section:introduction:structure}
 
 The content of the thesis will be presented in detail in the following
-chapters.
-
-First, Chapter \ref{chapter:background} provides an overview of the main
-concepts and technologies used in this project, so that this document may be
-self-contained.
-
-\sidenote{TODO: describe other chapters...}
+chapters. First, Chapter \ref{chapter:background} provides an overview of the
+main concepts and technologies used in this project, so that this document may
+be self-contained. Then, Chapter \ref{chapter:analysis} analyses the objectives
+and requirements of this thesis, defining an outline for the strategy to adopt.
+Afterward, Chapter \ref{chapter:design} describes the solution designed for the
+project and Chapter \ref{chapter:implementation} delves into the details of its
+concrete implementation. Towards the end, Chapter \ref{chapter:validation}
+explains the validation methods applied to FRASP and the implemented solution.
+Finally, Chapter \ref{chapter:conclusions} provides a summary of the
+achievements and future explorations of this project.
 
 \section{Style}
+\label{section:introduction:style}
 
 The writing style adopted within this document provides intentional meaning to
 the font styles used in words or sentences. Here follows a comprehensive list
@@ -67,10 +74,11 @@ of such font styles and their meanings:
 \end{itemize}
 
 \section{Prerequisites}
+\label{section:introduction:prerequisites}
 
 The following chapters may contain references to concepts related to
 object-orient\-ed and functional programming, assuming that the reader is
 familiar with such paradigms (specifically the Java \cite{Java} and Scala
 \cite{Scala} documentations). Indeed, Scala has been adopted as the language of
 choice in this document for abstracting over software interfaces and writing
-pseudo-code, due to its clean and minimalistic functional syntax.
+pseudocode, due to its clean and minimalistic functional syntax.

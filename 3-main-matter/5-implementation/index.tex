@@ -3,6 +3,38 @@
 \chapter{Implementation}
 \label{chapter:implementation}
 
-\sidenote{
-  How was the solution implemented concretely?
-}
+\section{Simulator}
+\paragraph{Class diagram}
+\paragraph{A simulator creates simulations}
+\paragraph{A simulation requires a flow and a configuration}
+\paragraph{Configuration is specific to the concrete type of simulator}
+
+\section{StepSimulator}
+\paragraph{Class diagram}
+\paragraph{Step Simulator and Async Step Simulator}
+\paragraph{Step Simulation Configuration}
+\paragraph{Step Halt Policies}
+\paragraph{Export Scheduler}
+
+\section{ConcurrentSimulator}
+\paragraph{Class diagram}
+\paragraph{Concurrent Simulator}
+\paragraph{Concurrent Simulation Configuration}
+\paragraph{Concurrent Halt Policies}
+
+\section{StreamExtension}
+\paragraph{Testing with \texttt{Stream}s}
+\paragraph{Extension methods: compositionality and fluency}
+\paragraph{API}
+
+\section{FiniteStreamExtension}
+\paragraph{Testing with bounded \texttt{Stream}s}
+\paragraph{Extension methods: compositionality and fluency}
+\paragraph{API}
+
+\section{Additional contributions}
+\paragraph{Dynamic environment: environment with tags}
+\paragraph{Sensor factories: isolate sensor implementations from incarnation}
+\paragraph{Common sensor mixin for incarnation}
+\paragraph{Gradient-based algorithms mixin for incarnation}
+\paragraph{Incarnation now depends on environment type and not environment instance}

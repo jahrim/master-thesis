@@ -2,15 +2,32 @@
   // Build
   "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build",
   // Grammar
-  "grammarly.config.documentDialect": "british",
-  "grammarly.config.documentDomain": "academic",
-  "grammarly.config.suggestionCategories.informalPronounsAcademic": "on",
-  "grammarly.files.include": [
-    "**/readme.md",
-    "**/README.md",
-    "**/*.txt",
-    "**/*.tex",
-  ],
+  "ltex.language": "en-GB",
+  "ltex.additionalRules.enablePickyRules": true,
+  "ltex.dictionary": {
+    "en-GB": [
+      "FRASP",
+      "Rx",
+      "stigmergy",
+      "nbr",
+      "multidirectionality",
+      "declarativity",
+      "transparence",
+      "switchS",
+      "switchC",
+      "CellLoop",
+      "StreamLoop",
+      "CellSink",
+      "StreamSink",
+      "mixin",
+      "mixins",
+      "nbrvar",
+      "foldhood",
+      "ScaFi",
+      "mux",
+      "dinamicity"
+    ]
+  },
   // Formatting
   "editor.tabSize": 2,
   "editor.insertSpaces": true,

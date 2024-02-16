@@ -1,6 +1,7 @@
 % ! TeX root = ../../../master-thesis.tex
 
 \subsection{Reactive Programming}
+\label{section:background:concepts:reactive-programming}
 
 \textbf{Reactive programming} is a paradigm built around the notions of
 \textit{continuous time-varying values} and \textit{propagation of change},
@@ -25,7 +26,7 @@ graph} (shown in Figure \ref{figure:dependency-graph}), expressing the
 dependencies of the variable \texttt{var3} on the variables \texttt{var1} and
 \texttt{var2}, so that any future reassignment of \texttt{var1} or
 \texttt{var2} will be automatically reflected on the value of \texttt{var3},
-unlike standard imperative programming. Due to their non-standard behavior,
+unlike standard imperative programming. Due to their non-standard behaviour,
 variables in reactive programming are also called \textbf{reactive variables}.
 
 \begin{figure}[h]
@@ -43,25 +44,25 @@ variables in reactive programming are also called \textbf{reactive variables}.
   \label{figure:dependency-graph}
 \end{figure}
 
-A value assigned to a reactive variable can be either a \textbf{behavior}, that
-is a time-varying value in continuous time (e.g. time itself), or an
+A value assigned to a reactive variable can be either a \textbf{behaviour},
+that is a time-varying value in continuous time (e.g., time itself), or an
 \textbf{event stream}, that is a potentially infinite sequence of events,
-occurring at discrete points in time (e.g. mouse clicks). Generally, behaviors
-are used to model time-varying states, which can always be sampled, while event
-streams are used to model state updates, which exist only in the discrete point
-in time when they are triggered. However, some implementations of reactive
-programming avoid such distinctions.
+occurring at discrete points in time (e.g., mouse clicks). Generally,
+behaviours are used to model time-varying states, which can always be sampled,
+while event streams are used to model state updates, which exist only in the
+discrete point in time when they are triggered. However, some implementations
+of reactive programming avoid such distinctions.
 
 In order to be applied to reactive variables, standard operators should be
 transformed into \textit{reactive operators}. Such transformation is called
 \textbf{lifting} and requires changing the type signature of the operators and
 properly updating the computational graph. The semantics of reactive
-programming languages change depending on how lifting is implemented:
-\textit{implicit lifting} allows to apply standard operators to reactive
-variable as-is (transforming them under the hood); \textit{explicit lifting}
+programming languages changes depending on how lifting is implemented:
+\textit{implicit lifting} allows applying standard operators to reactive
+variables as-is (transforming them under the hood); \textit{explicit lifting}
 provides a \textbf{lift} primitive to apply the transformation to a standard
 operator; \textit{manual lifting} does not implement lifting, requiring the
-developer to manually sample and compose the values of behaviors.
+developer to manually sample and compose the values of behaviours.
 
 Reactive operators are used to build the computational graph of a reactive
 program, creating dependencies between reactive variables. Some reactive
@@ -72,9 +73,9 @@ computational graphs whose dependencies change over time.
 
 The \textbf{evaluation model} of a reactive programming language deals with the
 propagation of changes within a computational graph. Propagation of change
-always involves a \textbf{producer} to trigger the change (e.g. a dependency)
-and a \textbf{consumer} to react to the change (e.g. a dependent). The
-evaluation model can be categorized based on the roles of the two entities:
+always involves a \textbf{producer} to trigger the change (e.g., a dependency)
+and a \textbf{consumer} to react to the change (e.g., a dependent). The
+evaluation model can be categorised based on the roles of the two entities:
 \begin{itemize}
   \item \textbf{Pull-Based}: consumers poll producers for their events,
         resulting in \textit{lazy reaction} (\textit{demand-driven propagation}),
@@ -105,9 +106,9 @@ change may reach \texttt{var3} before \texttt{var2}, leading to an inconsistent
 value for \texttt{var3}, since \texttt{var2} is not up-to-date. Eventually,
 \texttt{var2} will also be updated and so \texttt{var3} will reach a consistent
 value. However, any dependency on \texttt{var3} would have already suffered
-from its inconsistencies (e.g. incorrect program state, wasteful
-recomputations), hence the requirement of mechanisms for \textbf{glitch
-freedom}. Note that glitches are a consequence of inconsistent individual
+from its inconsistencies (e.g., incorrect program state, wasteful
+re-computations), hence the requirement of mechanisms for \textbf{glitch
+freedom}. Note that glitches are a consequence of inconsistent sequential
 handling of simultaneous events or reactions.
 
 Most implementations of push-based reactive programming guarantee glitch
@@ -115,24 +116,24 @@ freedom in non-distributed environments. However, an important extension of
 reactive programming is \textbf{distributed reactive programming}, which allows
 expressing and managing the dependencies between the components of a
 distributed system by distributing the nodes of a computational graph across
-multiple machines (e.g. in "\texttt{var3 = var1 + var2}", \texttt{var1},
-\texttt{var2} and \texttt{var3} may be located in different machines). Recent
-progress shows that is possible to guarantee glitch freedom also in push-based
-distributed reactive programming for acyclic graphs \cite{QPROP}, or at
-different levels of consistency \cite{DREAM}, while retaining scalability and
-parallelism.
+multiple machines (e.g., in \enquote{\texttt{var3 = var1 + var2}},
+\texttt{var1}, \texttt{var2} and \texttt{var3} may be located in different
+machines). Recent progress shows that is possible to guarantee glitch freedom
+also in push-based distributed reactive programming for acyclic graphs
+\cite{QPROP}, or at different levels of consistency \cite{DREAM}, while
+retaining scalability and parallelism.
 
 Reactive programming is most suitable for designing event-driven applications,
 achieving better declarativity and looser coupling between components with
 respect to standard \textbf{event-driven programming} paradigms, such as the
-\textit{observer} pattern\footnote{a pattern for event-driven programming, in
+\textit{observer pattern}\footnote{A pattern for event-driven programming, in
 which consumers react to events by registering some callbacks
 (\textit{listeners}) to the event producers, so that they may be executed each
 time a new event is triggered. Callbacks may also trigger other events,
 creating a dependency graph between callbacks. In fact, most reactive
-implementations are an abstraction over this pattern.}. In fact, the former
-hides how the propagation of change is implemented in the system, letting the
-developer focus solely on the behavior of the program, while the latter
-requires the developer to manually implement dependencies as events that may
-trigger dependent events, resulting in a flow of control that is harder to
+implementations are an abstraction over this pattern.}. In particular, the
+former hides how the propagation of change is implemented in the system,
+letting the developer focus solely on the behaviour of the program, while the
+latter requires the developer to manually implement dependencies as events that
+may trigger dependent events, resulting in a flow of control that is harder to
 understand and nested transitive dependencies that are harder to detect.

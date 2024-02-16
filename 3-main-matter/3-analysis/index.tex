@@ -3,7 +3,200 @@
 \chapter{Analysis}
 \label{chapter:analysis}
 
-\sidenote{
-  What is the problem that needs to be solved?
-  Requirements...
-}
+This chapter performs an analysis of the objectives and requirements of this
+project, outlining the strategy to achieve them. First, Section
+\ref{section:analysis:objectives} introduces the objective of the project,
+which is the implementation of functional tests for FRASP. Then, Section
+\ref{section:analysis:aggregate-testing} explains the process of testing
+aggregate specifications, while Section
+\ref{section:analysis:aggregate-convergence-testing} describes the specific
+strategy adopted for testing aggregate specifications, mostly based on
+convergence properties. Finally, Section \ref{section:analysis:simulation}
+concerns the validation of properties through simulation and analyses the
+characteristics of an ideal simulator.
+
+\section{Objectives}
+\label{section:analysis:objectives}
+
+As anticipated in Section \ref{section:introduction:content} of the
+introduction, FRASP is currently in research and requires a consolidated test
+suite supporting the research process, setting expectations on the behaviour of
+the framework and assessing its correctness in its current state, so that
+software regressions may be avoided during its development. Additionally, the
+test suite could discover unexpected implications of the reactive model adopted
+by FRASP, as there are no guarantees on the equivalence between a reactive or
+round-based execution of the same specification.
+
+At the current state, the test suite of the FRASP library contains only a few
+tests and samples validating the reactivity and the generation of the device
+exports for each language construct individually (\textbf{semantic tests}),
+while functional tests concerning the execution of aggregate specifications
+(\textbf{aggregate tests}) are missing. In other words, no tests verify that an
+aggregate evolves following the user's specification.
+
+The goal of this project is to implement the missing aggregate tests, assessing
+the correctness of several specifications, executed against different network
+configurations and environments. \ac{ScaFi} will be used as a reference for
+establishing the expectations on FRASP specifications, so that FRASP may be
+empirically proved functionally equivalent to \ac{ScaFi}, while retaining its
+reactive benefits.
+
+\section{Aggregate Testing}
+\label{section:analysis:aggregate-testing}
+
+An aggregate test should verify that an aggregate behaves as expected with
+respect to a given specification. However, while its purpose may be clear at an
+abstract level, a more detailed analysis is required to determine its concrete
+implications (e.g., what does it mean for an aggregate to behave as expected?).
+
+Leveraging the network operational semantics of field calculus
+\cite{CAS-AggregateComputingBlocks}, the evolution of an aggregate can be
+described by a transition system in which each transition is $N_{t}
+\xrightarrow{act} N_{t+1}$ with:
+
+\begin{align*}
+   & N_t::=(\Psi_t, E_t)                & : & \textrm{ the state of the aggregate at time t}                                 & \\
+   & E_t::=(\tau_t, \Sigma_t)           & : & \textrm{ the state of the environment at time t}                               & \\
+   & \Psi_t                             & : & \textrm{ the output of all the devices at time t}                              & \\
+   & \tau_t                             & : & \textrm{ the topology of the network at time t}                                & \\
+   & \Sigma_t                           & : & \textrm{ the percepts of the sensors at time t}                                & \\
+   & act::=\delta_{k} \textrm{ or } env & : & \textrm{ a change in the aggregate}                                            & \\
+   & \delta_{k}                         & : & \textrm{ a change due to the } k^{th} \textrm{ device broadcasting its export} & \\
+   & env                                & : & \textrm{ a change in the environment}                                          & \\
+\end{align*}
+
+In a \textit{static} environment $E_0$, transitions can be reduced to the form
+$\Psi_{t} \xrightarrow{\delta_{k}} \Psi_{t+1}$, i.e., the transition system is
+uniquely described by an initial aggregate state and the sequence of all the
+device exports.
+
+Once the evolution of an aggregate is expressed as a transition system, formal
+validation techniques for transition systems may be applied to aggregates as
+well. In particular, one can express properties on aggregates using
+\textit{propositional logic}, for static attributes, or even \textit{temporal
+logics}, for dynamic or branching attributes. Then, properties may be verified
+through formal techniques such as \textit{model checking} or
+\textit{simulation}.
+
+Properties are used to formally define the expectations for the evolution of an
+aggregate, including the output of the devices in the network, their percepts,
+the topology of the network, environmental changes and device communication.
+Expectations may involve one, some or all of the devices in the network,
+therefore properties can be:
+\begin{itemize}
+  \item \textit{global}: a property of the whole aggregate (e.g., \texttt{mid}
+        should evaluate to the identifiers of all the devices in the network).
+  \item \textit{regional}: a property of a group of devices in an aggregate
+        (e.g., \texttt{branch (isRed)\{obstacle\}\{???\}} should evaluate to
+        \texttt{obstacle} for all red devices in the network).
+  \item \textit{individual}: a property of a single device in an aggregate
+        (e.g., device 0 should always be a source of potential).
+\end{itemize}
+
+\section{Aggregate Convergence Testing}
+\label{section:analysis:aggregate-convergence-testing}
+
+The first step in consolidating the test suite is to implement several
+aggregate \textbf{unit tests}, considering a FRASP construct as the
+\textit{software unit}, and \textbf{integration tests}, involving FRASP
+specifications (i.e., combinations of FRASP constructs). Best practices
+\cite{UnitTesting} want unit tests to be:
+\begin{itemize}
+  \item \textit{simple}: easy to implement. Indeed, inserting complex logic in
+        a test requires such logic also to be tested, in order to ensure that
+        the errors found by the test are not caused by faults in its logic.
+        Moreover, simple tests can be easily understood, facilitating the
+        detection of the cause of failure.
+  \item \textit{isolated}: independent of other unit tests (i.e., concerning
+        a single software unit). Dependencies between unit tests make it more
+        difficult to detect the cause of failure.
+  \item \textit{reproducible}: always yielding the same results under the same
+        initial conditions (i.e., \textit{determinism}). Non-determinism may
+        cause a test to succeed under breaking changes or to fail even with
+        no changes.
+  \item \textit{finite}: yielding a result in a limited amount of time, ideally
+        short for supporting frequent repeatability.
+  \item \textit{automated}: executed each time a relevant (preferably small)
+        increment of software is completed.
+\end{itemize}
+
+By definition, integration tests cannot be isolated, however the other
+properties should be preserved to the best of one's possibilities.
+
+One of the challenges with aggregate tests is that the evolution of an
+aggregate is naturally non-deterministic, due to the unpredictability of
+communication in distributed systems. As a consequence, tests should be
+carefully designed to reason about some deterministic higher-level behaviour
+exhibited by the underlying non-deterministic evolution of the aggregate (in
+literature, \textbf{don't care non-determinism}), so that they can be
+reproducible without forcing a deterministic evolution of the aggregate, which
+would be unrealistic and reduce the importance of the tests.
+
+In this sense, the primary strategy employed in this project is
+\textbf{aggregate convergence tests}, which are based on the convergence of an
+aggregate towards an expected stable state. Convergence is a property that can
+be expressed in \textit{linear temporal logic} as $\lozenge \square P$
+(\enquote{\textit{sometimes P will hold forever}}). In particular, it may be
+interesting to validate the property $\lozenge \square \Psi_{expected}$,
+meaning that the outputs of an aggregate will eventually reach and hold the
+expectation $\Psi_{expected}$. However, convergence can only be validated for
+self-stabilising specifications (e.g., non-oscillating), assuming a finite
+number of changes in the environment.
+
+\section{Simulation}
+\label{section:analysis:simulation}
+
+Since a simulator is already provided within FRASP, simulation will be used as
+a formal verification method for properties in aggregate tests. However, the
+current simulator is basic and lacks some properties required for adequate
+testing (referring to the previous Section
+\ref{section:analysis:aggregate-convergence-testing}). In particular, an
+adequate simulator for aggregate tests should enjoy the following properties:
+\begin{itemize}
+  \item \textit{observability}: during a simulation, it should be possible for
+        external entities to reconstruct the state of the simulation from its
+        outputs. For aggregate tests, a simulation should expose at least the
+        state of the aggregate and the progress of the simulation. Additionally,
+        it would be useful to have access to individual, regional and global
+        views of the aggregate. At the moment, the simulator does not expose
+        any outputs to other entities, instead, it only shows the outputs of
+        individual devices to the user through a console.
+
+        This property is required for automated aggregate tests.
+  \item \textit{controllability}: it should be possible to control a
+        simulation, leading it to a stable state when its execution does not
+        converge in a finite amount of time. For aggregate tests, a simulation
+        should at least have the capability to be halted. At the moment, a
+        simulation starts as the simulator is created and continues
+        indefinitely, forever reacting to the next event.
+
+        This property is required for finite aggregate tests.
+  \item \textit{fairness}: in aggregate tests, it should always be possible for
+        every device to compute an export in the future. At the moment, the
+        simulator relies on the scheduling of the underlying runtime to achieve
+        fairness.
+
+        This property is required to support self-stabilisation.
+  \item \textit{efficiency}: it should be optimised to minimise execution time,
+        possibly leveraging parallelism. At the moment, the simulator supports
+        concurrent execution, but it suffers from critical races (and other
+        deeper problems discussed later in Section
+        \ref{section:design:concurrent-simulation}).
+
+        This property is required to reduce the computational costs of testing
+        and support frequent repeatability.
+  \item \textit{reproducibility}: multiple simulations should yield similar
+        results under similar initial configurations, implying the ability to
+        execute a simulation under similar conditions multiple times
+        (\textit{repeatability}) or under different conditions
+        (\textit{replicability}).
+
+        Naturally, this property is required for reproducible tests.
+\end{itemize}
+
+Since the current simulator does not enjoy all the aforementioned properties,
+an extension of the simulator is due. Most importantly, observability and
+controllability should be provided for testing. However, in doing so, one
+should be mindful of preserving the reactive execution model of FRASP as is.
+Indeed, a problem with testing through simulation is that the results of the
+tests may be influenced by the implementation of the simulator.

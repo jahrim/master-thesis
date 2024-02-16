@@ -1,16 +1,17 @@
 % ! TeX root = ../../../master-thesis.tex
 
 \subsection{Sodium}
+\label{section:background:technologies:sodium}
 
-\textbf{Sodium}\footnote{\url{https://github.com/SodiumFRP}} is a
+\textbf{Sodium}\footnote{Repository at: \url{https://github.com/SodiumFRP}} is a
 BSD-licensed library implementing \ac{FRP} in several languages (including
 Java), inspired by many previous implementations of \ac{FRP}. Sodium
 is meant to be a \textit{true} \ac{FRP} implementation, in the sense that it
-provides full compositionality compared to other implementations (e.g. Reactive
-Extensions (Rx)\footnote{\url{https://github.com/ReactiveX}}, which is not
+provides full compositionality compared to other implementations (e.g., Reactive
+Extensions (Rx)\footnote{Repository at: \url{https://github.com/ReactiveX}}, which is not
 glitch-free) \cite{FRP}.
 
-In Sodium, behaviors are modelled as \textbf{cells} with denotation
+In Sodium, behaviours are modelled as \textbf{cells} with denotation
 \texttt{Cell[V]}, indicating a time-varying value of type \texttt{V}, while
 event streams are modelled as simply \textbf{streams} with denotation
 \texttt{Stream[E]}, indicating a sequence of emissions of events of type
@@ -23,13 +24,13 @@ Time is represented as a sequence of \textbf{transactions}, which can be
 interpreted as atomic time units. Only one transaction at a time can be
 executed by the engine of Sodium, even when considering multiple independent
 computational graphs. During a transaction, first all events are processed
-simultaneously keeping all values constant (i.e. immutable
+simultaneously keeping all values constant (i.e., immutable
 \textbf{transactional context}), then all time-varying values are updated
 accordingly. A transaction is started automatically each time an event is
 pushed in the computational graph and closed only after its corresponding
 propagation of change has been completed. Alternatively, it is possible to
 create a new transaction explicitly using the \texttt{Transaction.run} method
-(e.g. useful for sending simultaneous events, graph initialization or handling
+(e.g., useful for sending simultaneous events, graph initialisation or handling
 forward references).
 
 Sodium provides a set of built-in core primitives for building static acyclic
@@ -76,7 +77,8 @@ combining \texttt{Cell}s and \texttt{Stream}s. These include:
   language=Scala,
   caption={An abstract view on the Sodium primitives for constructing static
       acyclic computational graphs. Some primitives can be derived as a
-      combination of the others.},
+      combination of the others (e.g., \texttt{constant} and
+      \texttt{snapshot}).},
   captionpos=b,
   label={listing:sodium-basic}
 ]{resources/listings/sodium-basic.txt}
@@ -104,7 +106,7 @@ Support is also provided for cyclic computational graphs. However, since a node
 declares its dependencies on other defined nodes during its creation, cyclic
 dependencies are not possible without a mechanism for forward referencing,
 allowing a node to declare a dependency on another node that is yet to be
-defined (e.g. itself). Sodium allows forward referencing in Java by decoupling
+defined (e.g., itself). Sodium allows forward referencing in Java by decoupling
 the declaration and definition of a node using the type \texttt{CellLoop[V]}
 (or \texttt{StreamLoop[E]}), which is used for declaring a node that will be
 assigned later to a defined \texttt{Cell} (or \texttt{Stream}) through its
@@ -124,22 +126,22 @@ assigned within the same transaction.
 
 Interoperability with non-\ac{FRP} software interfaces is provided via a set of
 \textbf{operational primitives} (Listing \ref{listing:sodium-operational}),
-which are excluded from the core primitives since their incorrect usage may
-break some properties of Sodium. A broker between an \ac{FRP} interface and a
+which are excluded from the core primitives, since their incorrect usage may
+break some properties of Sodium. A broker between a \ac{FRP} interface and a
 non-\ac{FRP} interface can be implemented using the type \texttt{CellSink[V]}
 (or \texttt{StreamSink[E]}), which is a \texttt{Cell} (or \texttt{Stream}) that
 supports event pushing. In particular, the \texttt{send} primitive implements
-non-FRP to FRP interactions, allowing to push an update to a \texttt{CellSink}
+non-FRP to FRP interactions, allowing pushing an update to a \texttt{CellSink}
 and managing the propagation of change through a push-based evaluation model
-(i.e. the caller of \texttt{send} will update all the dependent nodes in the
+(i.e., the caller of \texttt{send} will update all the dependent nodes in the
 computation graph). Conversely, the \texttt{listen} primitive implements FRP to
-non-FRP interactions, allowing to register a callback to execute any time the
-state of a \texttt{Cell} is updated (such subscription can be cancelled using
-the returned \texttt{Listener}). Note that using \texttt{send} within a
-callback is not allowed, as it could be used to implement custom primitives
-that violate compositionality. For the same reasons, Sodium discourages and
-forbids inheritance of its types. Instead, custom primitives should be
-implemented as a combination of the core primitives to preserve
+non-FRP interactions, allowing the registration of a callback to execute any
+time the state of a \texttt{Cell} is updated (such subscription can be
+cancelled using the returned \texttt{Listener}). Note that using \texttt{send}
+within a callback is not allowed, as it could be used to implement custom
+primitives that violate compositionality. For the same reasons, Sodium
+discourages and forbids inheritance of its types. Instead, custom primitives
+should be implemented as a combination of the core primitives to preserve
 compositionality.
 
 \lstinputlisting[
@@ -150,15 +152,15 @@ compositionality.
 ]{resources/listings/sodium-operational.txt}
 
 Additionally, Sodium offers other operational operators to tackle some specific
-practical problems (e.g. \texttt{value}, \texttt{updates}, \texttt{split},
+practical problems (e.g., \texttt{value}, \texttt{updates}, \texttt{split},
 \texttt{defer}\dots) and many more helper primitives to facilitate the
-construction of computational graphs (e.g. \texttt{accum}, \texttt{collect},
-\texttt{sequence}\dots). While these operators won't be discussed here, since
-they are not as relevant for this project, more information about them and
-Sodium can be found in the book \cite{FRP}. The book also describes some useful
-\ac{FRP} patterns, such as the \textbf{calming} pattern, useful to create
-\textbf{calm} reactive variables, which avoid firing consecutive repetitions of
-the same event, reducing redundant re-computations.
+construction of computational graphs (e.g., \texttt{accum}, \texttt{collect},
+\texttt{sequence}, \texttt{gate}\dots). While these operators won't be
+discussed here, since they are not as relevant for this project, more
+information about them and Sodium can be found in the book \cite{FRP}. The book
+also describes some helpful \ac{FRP} patterns, such as the \textbf{calming}
+pattern, useful to create \textbf{calm} reactive variables, which avoid firing
+consecutive repetitions of the same event, reducing redundant re-computations.
 
 The authors compare other standard event-programming paradigms (specifically
 the observer pattern) to Sodium, highlighting several bugs that are common in
@@ -170,12 +172,12 @@ particular, Sodium promises to solve the following problems:
         abstracts over event ordering making it completely undetectable.
   \item \textit{Missed first event}: it is difficult to guarantee that
         callbacks are registered before the first event. Sodium can solve the
-        problem by initializing the program within a transaction.
-  \item \textit{Messy state}: callbacks tend to describe behaviors as state
+        problem by initialising the program within a transaction.
+  \item \textit{Messy state}: callbacks tend to describe behaviours as state
         machines, which are difficult to maintain. Sodium solves the problem
         using the declarativity of the \ac{FRP} paradigm.
   \item \textit{Threading issues}: executing callbacks in parallel may lead to
-        deadlock due to synchronization. Sodium solves the problem by executing
+        deadlock due to synchronisation. Sodium solves the problem by executing
         only one transaction at a time.
   \item \textit{Leaking callbacks}: forgetting to deregister a callback from
         a producer causes memory leaks and wastes CPU time. Sodium
@@ -184,5 +186,5 @@ particular, Sodium promises to solve the following problems:
         cyclic dependencies between nested callbacks. Sodium solves the problem
         using the declarativity of the \ac{FRP} paradigm.
 \end{itemize}
-In addition, Sodium grants the compositionality required to tackle the
-complexity of complex systems.
+In addition, Sodium grants the compositionality required to tackle the growing
+complexity of scalable systems.

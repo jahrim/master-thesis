@@ -3,4 +3,4 @@ type CellSink[V] <: Cell[V]
 def send[E](s: StreamSink[E], event: E): Unit
 def send[V](c: CellSink[V], update: V): Unit
 def listen[E](s: Stream[E], callback: E => Unit): Listener
-def listen[V](s: Cell[V], callback: V => Unit): Listener
+def listen[V](c: Cell[V], callback: V => Unit): Listener
