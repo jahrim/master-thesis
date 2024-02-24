@@ -1,0 +1,28 @@
+% ! TeX root = ../../master-thesis.tex
+
+\section{Concurrent Simulation}
+\label{section:design:concurrent-simulation}
+
+Concurrency in reactive simulations can be achieved by delegating the
+propagation of change to some workers (e.g., a thread pool). In particular, in
+Sodium, concurrency can be achieved by removing a dependency between a consumer
+and a producer in a computational graph, then listening to the events of the
+producer and delegating to a worker the propagation of each event towards the
+consumer. However, this approach is limited to concurrency and cannot achieve
+parallelism, due to Sodium's transactional system.
+
+As discussed in Section \ref{section:background:technologies:sodium}, Sodium's
+transactions are executed one at a time to guarantee glitch freedom, trading
+off parallelism to ensure consistency. Later, it was discovered that
+transactions are executed sequentially even among independent computational
+graphs. Therefore, unless the computation of a device is detached from the
+computational graph (i.e., executed outside the FRP engine), concurrent
+simulations cannot be executed in parallel, in fact concurrent events are still
+processed sequentially.
+
+Moreover, the deployment of the reactive execution model in real distributed
+systems is still unclear, possibly hinting towards the research of distributed
+reactive programming solutions. Further research could discover the effects of
+Sodium's consistency in the evolution of aggregate of devices and evaluating
+the possibility of achieving the same level of consistency in large-scale
+distributed systems, such as \ac{CAS}s.

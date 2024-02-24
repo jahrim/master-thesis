@@ -1,0 +1,21 @@
+% ! TeX root = ../../master-thesis.tex
+
+\section{Convergence Simulation}
+\label{section:design:convergence-simulation}
+
+The simulation interface can be extended once more to provide direct support
+for aggregate convergence tests, exposing an operation for evaluating the limit
+of an aggregate evolution with respect to time, that is a stable state for
+self-stabilizing specifications. To support such operation, during the
+configuration phase, a simulation should accept a \textbf{halt policy}, which
+is a condition that stops the simulation when satisfied. Moreover, such halt
+policy should be designed so that the simulation is stopped when the aggregate
+reaches a stable state.
+
+For example, for a step simulation, a suitable halt policy would be to stop the
+simulation when there are no more exports that can be extracted from the device
+queues. Instead, for a general reactive simulation, a suitable halt policy
+would be to stop the simulation after a certain period of inactivity (i.e.,
+time elapsed since the last emitted event). However, real-world time introduces
+non-determinism in the results of the simulations, rendering the policy not
+suitable for testing.

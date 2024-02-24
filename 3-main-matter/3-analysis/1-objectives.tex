@@ -1,0 +1,27 @@
+% ! TeX root = ../../master-thesis.tex
+
+\section{Objectives}
+\label{section:analysis:objectives}
+
+As anticipated in Section \ref{section:introduction:content} of the
+introduction, FRASP is currently in research and requires a consolidated test
+suite supporting the research process, setting expectations on the behaviour of
+the framework and assessing its correctness in its current state, so that
+software regressions may be avoided during its development. Additionally, the
+test suite could discover unexpected implications of the reactive model adopted
+by FRASP, as there are no guarantees on the equivalence between a reactive or
+round-based execution of the same specification.
+
+At the current state, the test suite of the FRASP library contains only a few
+tests and samples validating the reactivity and the generation of the device
+exports for each language construct individually (\textbf{semantic tests}),
+while functional tests concerning the execution of aggregate specifications
+(\textbf{aggregate tests}) are missing. In other words, no tests verify that an
+aggregate evolves following the user's specification.
+
+The goal of this project is to implement the missing aggregate tests, assessing
+the correctness of several specifications, executed against different network
+configurations and environments. \ac{ScaFi} will be used as a reference for
+establishing the expectations on FRASP specifications, so that FRASP may be
+empirically proved functionally equivalent to \ac{ScaFi}, while retaining its
+reactive benefits.

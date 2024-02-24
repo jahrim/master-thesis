@@ -1,0 +1,23 @@
+// Creation
+object Incarnation extends SimulationIncarnation:
+  override type Environment = environment.Environment
+object Simulator extends ConcurrentSimulator, WithIncarnation(Incarnation):
+  override type Configuration[A] = ConcurrentSimulationConfiguration[A]
+import Simulator.incarnation.{*, given}
+
+// Configuration
+val executor = Executors.newFixedThreadPool(nThreads = 10)
+val configuration = Simulator.ConcurrentSimulationConfiguration[DeviceId](
+  environment = environment.Environment.euclideanGrid(cols = 3, rows = 3),
+  haltPolicy = Simulator.HaltPolicy.haltAfterInactivityOf(5.seconds),
+  executor = ExecutionContext.fromExecutor(executor),
+  logger = Logger.NoOperation,
+)
+val simulation = Simulator.simulation[DeviceId](mid)(using configuration)
+
+// Preparation
+simulation.exported.listen(exported => println(exported))
+simulation.termination.onComplete(_ => executor.shutdown())
+
+// Execution
+simulation.start()

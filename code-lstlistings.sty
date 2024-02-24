@@ -36,3 +36,20 @@
   ndkeywords={@Deprecated, @JvmField, @JvmName, @JvmOverloads, @JvmStatic, @JvmSynthetic, Array, Byte, Double, Float, Int, Integer, Iterable, Long, Runnable, Short, String, Unit, it},
   sensitive=true
 }
+
+\lstdefinelanguage{Scala}{
+  morekeywords={
+      abstract,case,catch,class,def,do,else,extends,
+      false,final,finally,for,forSome,given,if,implicit,import,lazy,
+      match,new,null,object,override,package,private,protected,
+      return,sealed,super,this,throw,trait,true,try,type,
+      using,val,var,while,with,yield,
+      Int,Double,Boolean,DeviceId},
+  otherkeywords={=>,<-,<\%,<:,>:,\#,@},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]"""
+}[keywords,comments,strings]

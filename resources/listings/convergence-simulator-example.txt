@@ -1,0 +1,23 @@
+// Creation
+object Incarnation extends SimulationIncarnation:
+  override type Environment = environment.Environment
+object Simulator
+  extends ConvergenceSimulator.StepSimulator, WithIncarnation(Incarnation):
+  override type Configuration[A] = StepSimulationConfiguration[A]
+import Simulator.incarnation.{*, given}
+import Simulator.lim
+
+// Configuration
+given Simulator.StepSimulationConfiguration[DeviceId] =
+  Simulator.StepSimulationConfiguration(
+    environment = environment.Environment.euclideanGrid(cols = 2, rows = 2),
+    haltPolicy = Simulator.HaltPolicy.haltOnVainStep,
+    logger = Logger.NoOperation,
+  )
+
+// Execution
+def count(from: Int, to: Int): Flow[Int] =
+  loop(from)(_.map(c => math.min(c + 1, to)))
+lim(count(from = 0, to = 10))  // Map(0 -> 10, 1 -> 10, 2 -> 10, 3 -> 10)
+lim(count(from = 5, to = 10))  // Map(0 -> 10, 1 -> 10, 2 -> 10, 3 -> 10)
+lim(count(from = 5, to = 15))  // Map(0 -> 15, 1 -> 15, 2 -> 15, 3 -> 15)

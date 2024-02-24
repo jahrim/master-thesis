@@ -1,0 +1,59 @@
+% ! TeX root = ../../master-thesis.tex
+
+\section{Simulation}
+\label{section:analysis:simulation}
+
+Since a simulator is already provided within FRASP, simulation will be used as
+a formal verification method for properties in aggregate tests. However, the
+current simulator is basic and lacks some properties required for adequate
+testing (referring to the previous Section
+\ref{section:analysis:aggregate-convergence-testing}). In particular, an
+adequate simulator for aggregate tests should enjoy the following properties:
+\begin{itemize}
+  \item \textit{observability}: during a simulation, it should be possible for
+        external entities to reconstruct the state of the simulation from its
+        outputs. For aggregate tests, a simulation should expose at least the
+        state of the aggregate and the progress of the simulation. Additionally,
+        it would be useful to have access to individual, regional and global
+        views of the aggregate. At the moment, the simulator does not expose
+        any outputs to other entities, instead, it only shows the outputs of
+        individual devices to the user through a console.
+
+        This property is required for automated aggregate tests.
+  \item \textit{controllability}: it should be possible to control a
+        simulation, leading it to a stable state when its execution does not
+        converge in a finite amount of time. For aggregate tests, a simulation
+        should at least have the capability to be halted. At the moment, a
+        simulation starts as the simulator is created and continues
+        indefinitely, forever reacting to the next event.
+
+        This property is required for finite aggregate tests.
+  \item \textit{fairness}: in aggregate tests, it should always be possible for
+        every device to compute an export in the future. At the moment, the
+        simulator relies on the scheduling of the underlying runtime to achieve
+        fairness.
+
+        This property is required to support self-stabilisation.
+  \item \textit{efficiency}: it should be optimised to minimise execution time,
+        possibly leveraging parallelism. At the moment, the simulator supports
+        concurrent execution, but it suffers from critical races (and other
+        deeper problems discussed later in Section
+        \ref{section:design:concurrent-simulation}).
+
+        This property is required to reduce the computational costs of testing
+        and support frequent repeatability.
+  \item \textit{reproducibility}: multiple simulations should yield similar
+        results under similar initial configurations, implying the ability to
+        execute a simulation under similar conditions multiple times
+        (\textit{repeatability}) or under different conditions
+        (\textit{replicability}).
+
+        Naturally, this property is required for reproducible tests.
+\end{itemize}
+
+Since the current simulator does not enjoy all the aforementioned properties,
+an extension of the simulator is due. Most importantly, observability and
+controllability should be provided for testing. However, in doing so, one
+should be mindful of preserving the reactive execution model of FRASP as is.
+Indeed, a problem with testing through simulation is that the results of the
+tests may be influenced by the implementation of the simulator.

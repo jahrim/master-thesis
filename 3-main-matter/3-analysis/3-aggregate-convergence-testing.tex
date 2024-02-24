@@ -1,0 +1,51 @@
+% ! TeX root = ../../master-thesis.tex
+
+\section{Aggregate Convergence Testing}
+\label{section:analysis:aggregate-convergence-testing}
+
+The first step in consolidating the test suite is to implement several
+aggregate \textbf{unit tests}, considering a FRASP construct as the
+\textit{software unit}, and \textbf{integration tests}, involving FRASP
+specifications (i.e., combinations of FRASP constructs). Best practices
+\cite{UnitTesting} want unit tests to be:
+\begin{itemize}
+  \item \textit{simple}: easy to implement. Indeed, inserting complex logic in
+        a test requires such logic also to be tested, in order to ensure that
+        the errors found by the test are not caused by faults in its logic.
+        Moreover, simple tests can be easily understood, facilitating the
+        detection of the cause of failure.
+  \item \textit{isolated}: independent of other unit tests (i.e., concerning
+        a single software unit). Dependencies between unit tests make it more
+        difficult to detect the cause of failure.
+  \item \textit{reproducible}: always yielding the same results under the same
+        initial conditions (i.e., \textit{determinism}). Non-determinism may
+        cause a test to succeed under breaking changes or to fail even with
+        no changes.
+  \item \textit{finite}: yielding a result in a limited amount of time, ideally
+        short for supporting frequent repeatability.
+  \item \textit{automated}: executed each time a relevant (preferably small)
+        increment of software is completed.
+\end{itemize}
+
+By definition, integration tests cannot be isolated, however the other
+properties should be preserved to the best of one's possibilities.
+
+One of the challenges with aggregate tests is that the evolution of an
+aggregate is naturally non-deterministic, due to the unpredictability of
+communication in distributed systems. As a consequence, tests should be
+carefully designed to reason about some deterministic higher-level behaviour
+exhibited by the underlying non-deterministic evolution of the aggregate (in
+literature, \textbf{don't care non-determinism}), so that they can be
+reproducible without forcing a deterministic evolution of the aggregate, which
+would be unrealistic and reduce the importance of the tests.
+
+In this sense, the primary strategy employed in this project is
+\textbf{aggregate convergence tests}, which are based on the convergence of an
+aggregate towards an expected stable state. Convergence is a property that can
+be expressed in \textit{linear temporal logic} as $\lozenge \square P$
+(\enquote{\textit{sometimes P will hold forever}}). In particular, it may be
+interesting to validate the property $\lozenge \square \Psi_{expected}$,
+meaning that the outputs of an aggregate will eventually reach and hold the
+expectation $\Psi_{expected}$. However, convergence can only be validated for
+self-stabilising specifications (e.g., non-oscillating), assuming a finite
+number of changes in the environment.

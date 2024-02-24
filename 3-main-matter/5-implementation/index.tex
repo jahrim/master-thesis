@@ -3,38 +3,28 @@
 \chapter{Implementation}
 \label{chapter:implementation}
 
-\section{Simulator}
-\paragraph{Class diagram}
-\paragraph{A simulator creates simulations}
-\paragraph{A simulation requires a flow and a configuration}
-\paragraph{Configuration is specific to the concrete type of simulator}
+This chapter describes the concrete solution implemented for this project,
+building upon the design presented in the previous chapter. First, it
+introduces the implementations of several simulators, including a general
+simulator (Section \ref{section:implementation:simulator}), a step-by-step
+simulator (Section \ref{section:implementation:step-simulator}), a concurrent
+simulator (Section \ref{section:implementation:concurrent-simulator}), and a
+convergence simulator (Section
+\ref{section:implementation:convergence-simulator}). Then, Sections
+\ref{section:implementation:stream-extension} and
+\ref{section:implementation:finite-stream-extension} detail two extensions of
+the Sodium library, integral to the implementation of the simulators and the
+test suite. Afterwards, Section
+\ref{section:implementation:dynamic-environments} discusses the solution for
+supporting dynamic environments in FRASP. Lastly, Section
+\ref{section:implementation:architecture} provides a comprehensive summary of
+the final state of the FRASP library through a complete class diagram.
 
-\section{StepSimulator}
-\paragraph{Class diagram}
-\paragraph{Step Simulator and Async Step Simulator}
-\paragraph{Step Simulation Configuration}
-\paragraph{Step Halt Policies}
-\paragraph{Export Scheduler}
-
-\section{ConcurrentSimulator}
-\paragraph{Class diagram}
-\paragraph{Concurrent Simulator}
-\paragraph{Concurrent Simulation Configuration}
-\paragraph{Concurrent Halt Policies}
-
-\section{StreamExtension}
-\paragraph{Testing with \texttt{Stream}s}
-\paragraph{Extension methods: compositionality and fluency}
-\paragraph{API}
-
-\section{FiniteStreamExtension}
-\paragraph{Testing with bounded \texttt{Stream}s}
-\paragraph{Extension methods: compositionality and fluency}
-\paragraph{API}
-
-\section{Additional contributions}
-\paragraph{Dynamic environment: environment with tags}
-\paragraph{Sensor factories: isolate sensor implementations from incarnation}
-\paragraph{Common sensor mixin for incarnation}
-\paragraph{Gradient-based algorithms mixin for incarnation}
-\paragraph{Incarnation now depends on environment type and not environment instance}
+\input{3-main-matter/5-implementation/1-simulator.tex}
+\input{3-main-matter/5-implementation/2-step-simulator.tex}
+\input{3-main-matter/5-implementation/3-concurrent-simulator.tex}
+\input{3-main-matter/5-implementation/4-convergence-simulator.tex}
+\input{3-main-matter/5-implementation/5-stream-extension.tex}
+\input{3-main-matter/5-implementation/6-finite-stream-extension.tex}
+\input{3-main-matter/5-implementation/7-dynamic-environments.tex}
+\input{3-main-matter/5-implementation/8-architecture.tex}

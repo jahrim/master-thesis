@@ -1,0 +1,52 @@
+% ! TeX root = ../../master-thesis.tex
+\section{Aggregate Testing}
+\label{section:analysis:aggregate-testing}
+
+An aggregate test should verify that an aggregate behaves as expected with
+respect to a given specification. However, while its purpose may be clear at an
+abstract level, a more detailed analysis is required to determine its concrete
+implications (e.g., what does it mean for an aggregate to behave as expected?).
+
+Leveraging the network operational semantics of field calculus
+\cite{CAS-AggregateComputingBlocks}, the evolution of an aggregate can be
+described by a transition system in which each transition is $N_{t}
+\xrightarrow{act} N_{t+1}$ with:
+
+\begin{align*}
+   & N_t::=(\Psi_t, E_t)                & : & \textrm{ the state of the aggregate at time t}                                 & \\
+   & E_t::=(\tau_t, \Sigma_t)           & : & \textrm{ the state of the environment at time t}                               & \\
+   & \Psi_t                             & : & \textrm{ the output of all the devices at time t}                              & \\
+   & \tau_t                             & : & \textrm{ the topology of the network at time t}                                & \\
+   & \Sigma_t                           & : & \textrm{ the percepts of the sensors at time t}                                & \\
+   & act::=\delta_{k} \textrm{ or } env & : & \textrm{ a change in the aggregate}                                            & \\
+   & \delta_{k}                         & : & \textrm{ a change due to the } k^{th} \textrm{ device broadcasting its export} & \\
+   & env                                & : & \textrm{ a change in the environment}                                          & \\
+\end{align*}
+
+In a \textit{static} environment $E_0$, transitions can be reduced to the form
+$\Psi_{t} \xrightarrow{\delta_{k}} \Psi_{t+1}$, i.e., the transition system is
+uniquely described by an initial aggregate state and the sequence of all the
+device exports.
+
+Once the evolution of an aggregate is expressed as a transition system, formal
+verification techniques for transition systems may be applied to aggregates as
+well. In particular, one can express properties on aggregates using
+\textit{propositional logic}, for static attributes, or even \textit{temporal
+logics}, for dynamic or branching attributes. Then, properties may be verified
+through formal techniques such as \textit{model checking} or
+\textit{simulation}.
+
+Properties are used to formally define the expectations for the evolution of an
+aggregate, including the output of the devices in the network, their percepts,
+the topology of the network, environmental changes and device communication.
+Expectations may involve one, some or all of the devices in the network,
+therefore properties can be:
+\begin{itemize}
+  \item \textit{global}: a property of the whole aggregate (e.g., \texttt{mid}
+        should evaluate to the identifiers of all the devices in the network).
+  \item \textit{regional}: a property of a group of devices in an aggregate
+        (e.g., \texttt{branch (isRed)\{obstacle\}\{???\}} should evaluate to
+        \texttt{obstacle} for all red devices in the network).
+  \item \textit{individual}: a property of a single device in an aggregate
+        (e.g., device 0 should always be a source of potential).
+\end{itemize}
