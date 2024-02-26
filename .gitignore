@@ -1,4 +1,7 @@
-# latex indent
+## drawio
+*.bkp
+
+## latex indent
 .latexindent
 
 ## Core latex/pdflatex auxiliary files:

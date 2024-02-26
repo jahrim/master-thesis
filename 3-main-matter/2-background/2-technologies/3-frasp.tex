@@ -3,7 +3,7 @@
 \subsection{FRASP}
 \label{section:background:technologies:frasp}
 
-\textbf{FRASP (Functional Reactive Approach to Self-organisation Programming)}\footnote{Repository at: \url{https://github.com/cric96/distributed-frp}}
+\textbf{FRASP (Functional Reactive Approach to Self-organization Programming)}\footnote{Repository at: \url{https://github.com/cric96/distributed-frp}}
 is a new open-source aggregate computing framework for the Scala programming
 language, currently under active research.
 
@@ -38,10 +38,10 @@ neatly capture their time-varying nature. Like \ac{FRP}, a specification is the
 configuration of a computational graph, which tracks the dependencies between
 computational fields and manages the propagation of change automatically.
 
-Computational fields are initialised by \texttt{Flow}s, which model
+Computational fields are initialized by \texttt{Flow}s, which model
 sub-computations in an aggregate specification and are first-class citizens in
 FRASP. The purpose of \texttt{Flow}s is to defer the construction of the
-computational graph until the devices of the aggregate network are initialised,
+computational graph until the devices of the aggregate network are initialized,
 which is required to express dependencies related to their neighbours and
 sensors. In addition, \texttt{Flow}s keep track of their position inside the
 FRASP specification, building the abstract syntax tree used for alignment.
@@ -64,7 +64,7 @@ device is a neighbour of itself.
 \lstinputlisting[
   language=Scala,
   caption={The core constructs of the FRASP language, represented as a trait,
-      abstracting over the actual organisation within FRASP.},
+      abstracting over the actual organization within FRASP.},
   captionpos=b,
   label={listing:frasp-language}
 ]{resources/listings/frasp-language.txt}
@@ -85,7 +85,7 @@ operates in two phases:
         environmental data) to its exports and from its exports to the
         neighbour data perceived by its neighbours. As soon as the graph is
         built, the \textit{input nodes}\footnote{
-          An input node is node initialised by a leaf \texttt{Flow} in the
+          An input node is node initialized by a leaf \texttt{Flow} in the
           abstract syntax tree of a FRASP specification: either
           \texttt{constant}, \texttt{mid}, \texttt{sensor}, \texttt{nbrSensor}
           or \texttt{loop}, as they do not require other \texttt{Flow}s in
@@ -139,7 +139,7 @@ operates in two phases:
 \end{figure}
 
 Since this project contributes to the implementation of FRASP, a brief overview
-of its architecture is due. Internally, FRASP is organised into the following
+of its architecture is due. Internally, FRASP is organized into the following
 three layered modules (Figure \ref{figure:frasp-modules}):
 \begin{itemize}
   \item \texttt{frp}: provide extensions and abstractions over the \ac{FRP}

@@ -1,0 +1,86 @@
+% ! TeX root = ../../master-thesis.tex
+
+\section{Observations}
+\label{section:verification:observations}
+
+The test suite yielded positive results, overall proving the FRASP library to
+be working as expected. However, the tests also confirmed a couple of issues,
+described in the following sections.
+
+\subsection{Referential Transparence}
+
+The aggregate computing \ac{DSL} in FRASP enjoys referential transparence,
+granting compositionality for its constructs. As a consequence of referential
+transparence, the same behaviour can be defined by replacing the values of a
+program with the constructs producing those values, like in the following
+example.
+
+\lstinputlisting[language=Scala]{resources/listings/branch-observation.txt}
+
+The above listing defines three specifications: \texttt{collectNeighbors}, for
+collecting the set of neighbours of all the devices (line 1);
+\texttt{branchAndCollectNeighbors}, for partitioning the network and then
+collecting the set of neighbours in each partition (line 4); finally,
+\texttt{collectNeighborsAndBranch}, for collecting the set of neighbours of all
+devices and then partitioning the network (line 7). Unexpectedly,
+\texttt{branchAndCollectNeighbors} and \texttt{collectNeighborsAndBranch} yield
+the same results, due to referential transparence (line 5 behaves the same as
+lines 8-9). In summary, \texttt{collectNeighborsAndBranch} does not work as
+intended.
+
+While referential transparence is not at all a negative property, FRASP
+currently has no mechanisms to reference the results of other specifications
+within the local scopes of its constructs. In the example, the forks of a
+\texttt{branch} construct cannot access the set of neighbours collected before
+partitioning. This was a known issue\footnote{
+\url{https://github.com/cric96/distributed-frp/issues/1}}, confirmed by the
+test suite of FRASP.
+
+\subsection{Inconsistency of Loop}
+
+The test suite found some specifications based on the \texttt{loop} construct
+producing inconsistent results. The inconsistencies manifested as an infinite
+execution for non-trivial self-stabilizing specifications, expected to
+stabilize in a finite amount of time. After further analysis, it was discovered
+that the inconsistent specifications had in common an evolution over time
+dependent both on the previous value $P$ and at least one external source of
+change $S$ (e.g., the \texttt{nbr} or \texttt{sensor} constructs).
+
+The cause of the problem is attributed to the fact that the previous and
+current simulators do not propagate exports immediately, but their transmission
+is scheduled for later in the future. However, the implementation of the
+\texttt{loop} construct relies on self-communication for evaluating the
+previous value $P$. As a consequence, there is a delay between the generation
+of the new value of \texttt{loop} and the corresponding update of $P$.
+
+During the delay, other dependencies of the \texttt{loop} construct, such as
+$S$, may trigger a propagation of change, generating a new inconsistent value
+of \texttt{loop}, based on the stale value of $P$ and the new value of $S$. The
+problem is aggravated by the fact that the inconsistent value is also scheduled
+for transmission, including self-communication. As a result, any such
+inconsistent value starts an inconsistent evolution over time, concurrently
+with the others. This phenomenon can quickly build up, causing the simulation
+to never cease firing new events.
+
+Analysing this issue was especially difficult, since most affected
+specifications in the test suite, including the gradient, achieve a robust
+convergence even with the inconsistent values, probably due to the type of
+operations involved in the specification (e.g., accumulating information by
+evaluating the maximum value).
+
+An example of highly susceptible specification is the following.
+
+\lstinputlisting[language=Scala]{resources/listings/zip-with-round-observation.txt}
+
+The specification in the example, namely \texttt{zipWithRound}, simply creates
+a \texttt{Flow} whose exports are the exports of the input \texttt{Flow}, bound
+to the time when they are transmitted (\textit{round}), ignoring repeated
+consecutive exports. However, if the input \texttt{Flow} has an external
+dependency (e.g., contains a \texttt{nbr} construct), the output \texttt{Flow}
+will likely emit inconsistent values. This specification nicely demonstrates
+the issue, as inconsistent values are manifested as repeated or even
+oscillating rounds in the exports.
+
+A solution to this issue could be to implement self-communication as an
+instantaneous transmission, however, a concrete implementation is yet to be
+developed.

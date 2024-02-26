@@ -9,7 +9,10 @@ illustrated in Figure \ref{figure:convergence-simulator-class-diagram}.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.60\textwidth]{resources/figures/convergence-simulator-class-diagram.png}
-  \caption{A UML class diagram of the convergence simulator and its concrete types.}
+  \caption{
+    A UML class diagram of the convergence simulator
+    and its concrete types.
+  }
   \label{figure:convergence-simulator-class-diagram}
 \end{figure}
 
@@ -23,7 +26,7 @@ Observation of the environment is possible by leveraging the device sensors
 within the specification, attaching their percepts to the device exports.
 However, to ensure that the result of \texttt{computeLimit} is a stable state
 of the aggregate, the specification should be self-stabilising and the
-simulation should be halted after the aggregate has stabilised. Additionally,
+simulation should be halted after the aggregate has stabilized. Additionally,
 if the aggregate has multiple possible non-deterministic stable states,
 \texttt{computeLimit} can only evaluate one of them. Indeed, it may be useful
 to consider only the root of the device exports to reduce the number of stable
@@ -41,15 +44,15 @@ effects, assuming the user has complete control over the environment:
         $N_s$ (\enquote{sometimes $N_s$ holds}), which is a looser property
         compared to convergence (\enquote{sometimes $N_s$ holds forever}).
   \item \texttt{haltAfterDurationOf(T)}: if a stable state exists, after an
-        infinite amount of time the aggregate will have certainly stabilised.
+        infinite amount of time the aggregate will have certainly stabilized.
         In general, the longer a simulation is executed (i.e., $T$), the
-        higher the chances of the aggregate having stabilised. This policy
+        higher the chances of the aggregate having stabilized. This policy
         works for all simulations, however, relying on real-world time
         introduces non-deterministic results.
   \item \texttt{haltAfterInactivityOf(T)}: inactivity in the simulation can be
         interpreted as a symptom of stability in the aggregate. In general,
         the longer the simulation is inactive (i.e., $T$), the higher the
-        chances of the aggregate having stabilised. This policy works the same
+        chances of the aggregate having stabilized. This policy works the same
         as \texttt{haltAfterDurationOf}, albeit possibly being more flexible
         (e.g., the same value of $T$ may apply to a larger variety of
         simulations).
@@ -58,7 +61,7 @@ effects, assuming the user has complete control over the environment:
         time. This policy offers deterministic results for deterministic
         simulations, however, it can only be used for \texttt{StepSimulation}s.
   \item \texttt{haltOnVainStep}: this policy guarantees to halt the simulation
-        when the aggregate has stabilised, however, it can only be used for
+        when the aggregate has stabilized, however, it can only be used for
         \texttt{StepSimulation}s.
 \end{itemize}
 

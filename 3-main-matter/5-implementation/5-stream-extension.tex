@@ -18,7 +18,10 @@ The collection of implemented extension methods is provided by the
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.8\textwidth]{resources/figures/stream-extension-class-diagram.png}
-  \caption{A UML class diagram of the \texttt{Stream} extension and its operators.}
+  \caption{
+    A UML class diagram of the \texttt{Stream} extension
+    and its operators.
+  }
   \label{figure:stream-extension-class-diagram}
 \end{figure}
 
@@ -187,10 +190,10 @@ The following operators can be used to control the throughput of
         Additionally, by limiting the memory of the operator, some events of
         the \texttt{Stream} with the highest throughput may be discarded when
         the memory is full, preventing possible overloads of its dependents.
-  \item \texttt{throttleWith}: a specialisation of the \texttt{sync} operator
+  \item \texttt{throttleWith}: a specialization of the \texttt{sync} operator
         with unitary \texttt{memory}, storing only the latest unpaired event of
         each input \texttt{Stream}.
-  \item \texttt{throttle}: a specialisation of the \texttt{throttleWith}
+  \item \texttt{throttle}: a specialization of the \texttt{throttleWith}
         operator, in which the output \texttt{Stream} $s'$ fires the events of
         the first input \texttt{Stream} $s_1$, while the second input
         \texttt{Stream} $s_2$ acts only as a throttle for $s_1$.

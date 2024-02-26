@@ -8,8 +8,8 @@ BSD-licensed library implementing \ac{FRP} in several languages (including
 Java), inspired by many previous implementations of \ac{FRP}. Sodium
 is meant to be a \textit{true} \ac{FRP} implementation, in the sense that it
 provides full compositionality compared to other implementations (e.g., Reactive
-Extensions (Rx)\footnote{Repository at: \url{https://github.com/ReactiveX}}, which is not
-glitch-free) \cite{FRP}.
+Extensions (Rx)\footnote{Repository at: \url{https://github.com/ReactiveX}},
+which is not glitch-free) \cite{FRP}.
 
 In Sodium, behaviours are modelled as \textbf{cells} with denotation
 \texttt{Cell[V]}, indicating a time-varying value of type \texttt{V}, while
@@ -30,7 +30,7 @@ accordingly. A transaction is started automatically each time an event is
 pushed in the computational graph and closed only after its corresponding
 propagation of change has been completed. Alternatively, it is possible to
 create a new transaction explicitly using the \texttt{Transaction.run} method
-(e.g., useful for sending simultaneous events, graph initialisation or handling
+(e.g., useful for sending simultaneous events, graph initialization or handling
 forward references).
 
 Sodium provides a set of built-in core primitives for building static acyclic
@@ -172,12 +172,12 @@ particular, Sodium promises to solve the following problems:
         abstracts over event ordering making it completely undetectable.
   \item \textit{Missed first event}: it is difficult to guarantee that
         callbacks are registered before the first event. Sodium can solve the
-        problem by initialising the program within a transaction.
+        problem by initializing the program within a transaction.
   \item \textit{Messy state}: callbacks tend to describe behaviours as state
         machines, which are difficult to maintain. Sodium solves the problem
         using the declarativity of the \ac{FRP} paradigm.
   \item \textit{Threading issues}: executing callbacks in parallel may lead to
-        deadlock due to synchronisation. Sodium solves the problem by executing
+        deadlock due to synchronization. Sodium solves the problem by executing
         only one transaction at a time.
   \item \textit{Leaking callbacks}: forgetting to deregister a callback from
         a producer causes memory leaks and wastes CPU time. Sodium

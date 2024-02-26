@@ -1,0 +1,12 @@
+case class Round[T](time: Int, result: Option[T])
+object Round { def zero[T]: Round[T] = Round(time = 0, result = None) }
+
+def zipWithRound[T](flow: Flow[T]): Flow[Round[T]] =
+  loop(Round.zero[T]) { rounds =>
+    lift(rounds, flow) {
+      case (Round(time, current), next) if !current.contains(next) =>
+        Round(time + 1, Some(next))
+      case (currentRound, _) =>
+        currentRound
+    }
+  }
