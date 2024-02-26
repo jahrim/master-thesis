@@ -3,9 +3,29 @@
 \chapter{Conclusions}
 \label{chapter:conclusions}
 
-\sidenote{
-  Brief summary
-  What has been achieved?
-  What has not been achieved?
-  What are future explorations for the work done in this project?
-}
+This thesis started with the goal of providing proper verification for the
+functionalities of FRASP; explored several strategies for observing and
+controlling the reactive execution of aggregate specifications, leading to a
+step-by-step reactive execution model; defined a concrete solution for
+evaluating convergence-based spatio-temporal properties of FRASP systems
+through simulation; and developed an extensive test suite, providing valuable
+insights on the current state of the library and future challenges to overcome.
+
+The results proved the overall soundness of FRASP, consolidating its
+foundations in support of upcoming improvements and extensions. Some minor
+issues were identified and analysed, including a limitation in referencing the
+computation of aggregate specifications within other specifications, and a
+scheduling problem with the previous and current simulators, causing
+inconsistencies during the evolution of aggregates over time.
+
+The contributions of this project includes a modular implementation of several
+simulators, a collection of operators for the analysis and monitoring of
+reactive variables, and explicit support for dynamic environments and proper
+sensors. Unfortunately, while the solution was designed for concurrency, some
+constraints of the underlying reactive engine revealed to negate parallelism,
+limiting the benefits of concurrency. On the one hand, there is opportunity for
+reducing the complexity of the current design by giving up concurrency; on the
+other hand, some questions arise about the implications of such constraints on
+the deployment of aggregate specifications in real-world distributed systems,
+specifically collective adaptive systems, hinting at the necessity for further
+research into distributed reactive solutions.
