@@ -26,9 +26,10 @@ namely:
         converges towards (or diverges from) an expected stable state, given an
         aggregate specification and a configuration for the simulation. The
         test can be repeated multiple times for statistical significance, since
-        the evolution of the aggregate is non-deterministic. Additionally, a
-        timeout can be set to interrupt the test in case a simulation continues
-        indefinitely against expectations.
+        the evolution of the aggregate may be non-deterministic. Additionally,
+        a timeout can be set to interrupt the test in case a simulation
+        continues indefinitely against expectations (e.g., due to a flaw in the
+        implementation of a specification).
   \item \texttt{convergentEquivalenceTest}: similar to
         \texttt{convergenceTest}, but it checks if different aggregate
         specifications converge to the same limit, using the same

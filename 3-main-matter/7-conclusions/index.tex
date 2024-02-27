@@ -12,20 +12,21 @@ through simulation; and developed an extensive test suite, providing valuable
 insights on the current state of the library and future challenges to overcome.
 
 The results proved the overall soundness of FRASP, consolidating its
-foundations in support of upcoming improvements and extensions. Some minor
-issues were identified and analysed, including a limitation in referencing the
+foundations in support of upcoming improvements and extensions. Some issues
+were identified and analysed, including a limitation in referencing the
 computation of aggregate specifications within other specifications, and a
 scheduling problem with the previous and current simulators, causing
 inconsistencies during the evolution of aggregates over time.
 
-The contributions of this project includes a modular implementation of several
+The contributions of this project include a modular implementation of several
 simulators, a collection of operators for the analysis and monitoring of
 reactive variables, and explicit support for dynamic environments and proper
-sensors. Unfortunately, while the solution was designed for concurrency, some
-constraints of the underlying reactive engine revealed to negate parallelism,
-limiting the benefits of concurrency. On the one hand, there is opportunity for
-reducing the complexity of the current design by giving up concurrency; on the
-other hand, some questions arise about the implications of such constraints on
-the deployment of aggregate specifications in real-world distributed systems,
-specifically collective adaptive systems, hinting at the necessity for further
-research into distributed reactive solutions.
+sensors. Unfortunately, while the solution was designed for concurrency, the
+strong consistency of the underlying reactive engine proved to negate
+parallelism, limiting the benefits of concurrency. On the one hand, there is
+opportunity for reducing the complexity of the current design by giving up
+concurrency, possibly embracing a complete \ac{FRP} implementation without
+compromises; on the other hand, some questions arise about the implications of
+such constraints on the deployment of aggregate specifications in real-world
+distributed systems, specifically collective adaptive systems, hinting towards
+the necessity for further research into distributed reactive solutions.

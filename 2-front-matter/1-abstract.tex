@@ -1,6 +1,24 @@
 % ! TeX root = ../master-thesis.tex
 
-\sidenote{
-  What is this thesis about?
-  Max 2000 characters, strict.
-}
+The growing relevance of large-scale distributed systems, including collective
+adaptive systems, has inspired the research for novel aggregate computing
+paradigms, addressing the complexity of programming macro-level behaviours over
+sizeable networks of devices. One of the most recent advancements in this
+direction is the development of a reactive execution model for such systems,
+embodied in the FRASP library, which overcomes several limitations of the
+previous round-based execution models, such redundant re-computations.
+
+The objective of this thesis is to consolidate FRASP by developing an extensive
+test suite, demonstrating the correctness of the current implementation,
+supporting future extensions of the library, and providing valuable insights
+into the implications of the reactive execution model and the challenges to
+overcome. With this goal in mind, the event-driven simulator provided by FRASP
+has been re-designed to enable the evaluation of spatio-temporal properties on
+the evolution of aggregate systems, focusing on the convergence of
+self-stabilizing specifications towards an expected stable state.
+
+In conclusion, the test suite verified the overall correctness of the FRASP
+library, except for a few problems regarding the implementation, which have
+been identified and analysed. Additionally, the strong consistency provided by
+the underlying reactive engine raised concerns about deployment in large-scale
+distributed systems, to be investigated in future research.

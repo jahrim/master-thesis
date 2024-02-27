@@ -86,13 +86,13 @@ combining \texttt{Cell}s and \texttt{Stream}s. These include:
 Sodium also provides support for dynamic computational graphs, including graph
 expansion, reduction and more general sub-graph substitution. A dynamic
 computational graph can be represented as a time-varying computational graph,
-that is a \texttt{Cell} holding a reactive variable as value (either other
-\texttt{Cell}s or \texttt{Stream}s). In particular, two switching operators are
-implemented in Sodium (Listing \ref{listing:sodium-switching}):
+that is a \texttt{Cell} holding a reactive variable as value (either
+\texttt{Stream}s or other \texttt{Cell}s). In particular, two switching
+operators are implemented in Sodium (Listing \ref{listing:sodium-switching}):
 \texttt{switchS} builds a dynamic computational graph from a \texttt{Cell} of
-\texttt{Stream}s $cs$, creating a new \texttt{Stream} $s'$ whose events are the
-events of the most recent \texttt{Stream} held by $cs$; \texttt{switchC} works
-similarly for \texttt{Cell} of \texttt{Cell}s.
+\texttt{Stream}s $c_s$, creating a new \texttt{Stream} $s'$ whose events are
+the events of the most recent \texttt{Stream} held by $c_s$; \texttt{switchC}
+works similarly for \texttt{Cell} of \texttt{Cell}s.
 
 \lstinputlisting[
   language=Scala,
@@ -134,15 +134,15 @@ supports event pushing. In particular, the \texttt{send} primitive implements
 non-FRP to FRP interactions, allowing pushing an update to a \texttt{CellSink}
 and managing the propagation of change through a push-based evaluation model
 (i.e., the caller of \texttt{send} will update all the dependent nodes in the
-computation graph). Conversely, the \texttt{listen} primitive implements FRP to
-non-FRP interactions, allowing the registration of a callback to execute any
+computational graph). Conversely, the \texttt{listen} primitive implements FRP
+to non-FRP interactions, allowing the registration of a callback to execute any
 time the state of a \texttt{Cell} is updated (such subscription can be
 cancelled using the returned \texttt{Listener}). Note that using \texttt{send}
 within a callback is not allowed, as it could be used to implement custom
 primitives that violate compositionality. For the same reasons, Sodium
-discourages and forbids inheritance of its types. Instead, custom primitives
-should be implemented as a combination of the core primitives to preserve
-compositionality.
+discourages and forbids inheritance of its base types. Instead, custom
+primitives should be implemented as a combination of the core primitives to
+preserve compositionality.
 
 \lstinputlisting[
   language=Scala,
@@ -176,7 +176,7 @@ particular, Sodium promises to solve the following problems:
   \item \textit{Messy state}: callbacks tend to describe behaviours as state
         machines, which are difficult to maintain. Sodium solves the problem
         using the declarativity of the \ac{FRP} paradigm.
-  \item \textit{Threading issues}: executing callbacks in parallel may lead to
+  \item \textit{Threading issues}: executing callbacks concurrently may lead to
         deadlock due to synchronization. Sodium solves the problem by executing
         only one transaction at a time.
   \item \textit{Leaking callbacks}: forgetting to deregister a callback from

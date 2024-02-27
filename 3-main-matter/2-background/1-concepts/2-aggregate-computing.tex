@@ -12,7 +12,7 @@ The idea behind aggregate computing is to program the behaviour of an aggregate
 directly at the \textit{macro-level}, without explicitly programming the
 behaviour of each of its individual components at the \textit{micro-level}. In
 particular, a specification in aggregate computing defines how the components
-of an aggregate should behave and interact with each other in terms of how
+of an aggregate should behave and interact with each other, in terms of how
 information propagates through the aggregate as a whole, moving the design
 focus from the individual to the collective. The propagation of information
 within an aggregate can be formally described using \textbf{field calculus},
@@ -36,7 +36,7 @@ with \textit{inter-device communication}, including accumulation and
 elaboration of neighbouring events for producing the next event of each device.
 Evolution over time can be obtained by specifying dependencies between the next
 and previous events of each device (potentially an expression of
-\textit{intra-device communication}).
+\textit{intra-device communication} or \textit{self-communication}).
 
 The restriction of a computational field refers to the application of a
 constraint on its evolution over space. Restriction can be achieved through
@@ -147,7 +147,7 @@ reducing it at each computation round using a \texttt{decay} function, until a
 
 These aggregate computing primitives cover the most common applications when
 programming aggregates, while offering additional resilience compared to field
-calculus due to their \textbf{self-stabilisation} property, which guarantees
+calculus due to their \textbf{self-stabilization} property, which guarantees
 convergence towards a final stable state for the aggregate from any initial
 state after some time without changes in its environment. As such, they can be
 used as building blocks in \textit{general or domain-specific libraries} for

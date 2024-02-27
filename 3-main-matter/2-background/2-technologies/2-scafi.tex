@@ -25,7 +25,7 @@ whose methods represent the constructs of field calculus.
 \ac{ScaFi} provides no explicit reification for computational fields. Indeed,
 any Scala expression is treated implicitly as a field calculus expression,
 yielding a computational field. For instance, the expression \enquote{$1+2$}
-yields constant uniform computational field holding the value $3$ at any point
+yields a constant uniform computational field holding the value $3$ at any point
 in space and time, obtained as the point-wise summation of a field of
 \enquote{$1$}s and a field of \enquote{$2$}s (Figure
 \ref{figure:constant-uniform-field}).
@@ -45,7 +45,7 @@ in space and time, obtained as the point-wise summation of a field of
 Despite being equivalent, the semantics of \ac{ScaFi} differs from the
 semantics of field calculus for some operators: evolution over space is
 implemented with a combination of the \texttt{nbr} and \texttt{foldhood}
-operators, the latter exploiting the former to accumulate the values of
+operators, the latter leveraging the former to accumulate the values of
 neighbours in each device (i.e., \texttt{nbr} does not yield a neighbouring
 value directly as in field calculus); restriction is implemented using the
 \texttt{aggregate} operator, which handles selective partitioning; evolution
@@ -53,9 +53,9 @@ over time with \texttt{rep} follows the same semantics as in field calculus.
 
 Additionally, \ac{ScaFi} provides contextual operators that handle interactions
 with the underlying platform, namely \texttt{mid}, which computes the field of
-the device identifiers, \texttt{sense}, which computes a field of the values
+the device identifiers; \texttt{sense}, which computes a field of the values
 perceived by a specific sensor from the environment (e.g., a field of
-temperatures), and \texttt{nbrvar}, which computes a field mapping each
+temperatures); and \texttt{nbrvar}, which computes a field mapping each
 neighbour to a value perceived by a specific sensor from the environment (e.g.,
 a field of distances with each neighbour).
 
@@ -74,12 +74,12 @@ such as the resilient aggregate computing blocks (Listing
 
 The higher-level primitives in \ac{ScaFi} include but are not limited to the
 already presented \texttt{G}, \texttt{C} and \texttt{T} blocks of aggregate
-computing, an additional \texttt{S} block, which handles sparse leader election
-based on proximity, a \texttt{branch} operator, implementing the branching
+computing; an additional \texttt{S} block, which handles sparse leader election
+based on proximity; a \texttt{branch} operator, implementing the branching
 expression of field calculus (relying on
 \texttt{aggregate})\footnote{Conditional computation without partitioning is
 implemented by the \texttt{mux} operator instead, which is equivalent to an
-\textit{if-then-else} expression in Scala.}, and a new \texttt{share} operator,
+\textit{if-then-else} expression in Scala.}; and a new \texttt{share} operator,
 which handles the evolution over time of a neighbouring value (indeed a
 combination of the behaviours of \texttt{rep} and \texttt{nbr} in field
 calculus, albeit much more efficient \cite{ScaFi-ShareOperator}).
@@ -103,7 +103,7 @@ of the following three steps in order:
   \item \textbf{interact}: the device broadcasts some information extracted
         from its output (called an \textbf{export}) to neighbouring devices and
         updates the local environment through its \textit{actuators}. The
-        export can be derived from the output of the device by searching in the
+        exports can be derived from the output of the device by searching in the
         abstract syntax tree for operations involving communication (e.g.,
         subtrees depending on \textbf{nbr}).
 \end{enumerate}

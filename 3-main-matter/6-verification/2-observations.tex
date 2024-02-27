@@ -15,7 +15,7 @@ transparence, the same behaviour can be defined by replacing the values of a
 program with the constructs producing those values, like in the following
 example.
 
-\lstinputlisting[language=Scala]{resources/listings/branch-observation.txt}
+\lstinputlisting[language=Scala, nolol=true]{resources/listings/branch-observation.txt}
 
 The above listing defines three specifications: \texttt{collectNeighbors}, for
 collecting the set of neighbours of all the devices (line 1);
@@ -24,9 +24,9 @@ collecting the set of neighbours in each partition (line 4); finally,
 \texttt{collectNeighborsAndBranch}, for collecting the set of neighbours of all
 devices and then partitioning the network (line 7). Unexpectedly,
 \texttt{branchAndCollectNeighbors} and \texttt{collectNeighborsAndBranch} yield
-the same results, due to referential transparence (line 5 behaves the same as
-lines 8-9). In summary, \texttt{collectNeighborsAndBranch} does not work as
-intended.
+the same results, due to referential transparence (line 5 is semantically
+equivalent to lines 8-9). In summary, \texttt{collectNeighborsAndBranch} does
+not work as intended.
 
 While referential transparence is not at all a negative property, FRASP
 currently has no mechanisms to reference the results of other specifications
@@ -70,16 +70,16 @@ evaluating the maximum value).
 
 An example of highly susceptible specification is the following.
 
-\lstinputlisting[language=Scala]{resources/listings/zip-with-round-observation.txt}
+\lstinputlisting[language=Scala, nolol=true]{resources/listings/zip-with-round-observation.txt}
 
 The specification in the example, namely \texttt{zipWithRound}, simply creates
 a \texttt{Flow} whose exports are the exports of the input \texttt{Flow}, bound
 to the time when they are transmitted (\textit{round}), ignoring repeated
 consecutive exports. However, if the input \texttt{Flow} has an external
-dependency (e.g., contains a \texttt{nbr} construct), the output \texttt{Flow}
-will likely emit inconsistent values. This specification nicely demonstrates
-the issue, as inconsistent values are manifested as repeated or even
-oscillating rounds in the exports.
+dependency (e.g., a \texttt{nbr} construct), the output \texttt{Flow} will
+likely emit inconsistent values. This specification nicely demonstrates the
+issue, as inconsistent values are manifested as repeated or even oscillating
+rounds in the exports.
 
 A solution to this issue could be to implement self-communication as an
 instantaneous transmission, however, a concrete implementation is yet to be

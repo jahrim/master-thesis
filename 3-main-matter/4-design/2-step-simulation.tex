@@ -14,14 +14,14 @@ every step (Figure \ref{figure:step-simulation}).
   \centering
   \includegraphics[width=1\textwidth]{resources/figures/step-simulation.png}
   \caption{The interface of a step simulation. Each device owns a queue of
-    exports that need to be broadcast. In fact, when an export is produced, it
+    exports that need to be transmitted. In fact, when an export is produced, it
     is inserted in the queue of the corresponding device, instead of being
     broadcast directly to its neighbours. The interface exposes new
-    functionalities for selecting, broadcasting (\texttt{next}) and observing
+    functionalities for selecting, transmitting (\texttt{next}) and observing
     (\texttt{steps}) the next export from the queues, increasing observability
     (the user can be notified if there are no more exports to be transmitted)
     and controllability (the user can decide exactly when the simulation should
-    continue). Other common functionalities for a simulation are included, but
+    continue). The other functionalities of simulations are supported, but
     hidden for clarity.}
   \label{figure:step-simulation}
 \end{figure}
@@ -53,7 +53,7 @@ selecting the next export to transmit. To this end, various scheduling policies
 can be implemented. For instance, the next export can be extracted from one of
 the non-empty queues chosen randomly, ensuring non-determinism in the
 aggregate's evolution. Alternatively, a round-robin policy can be employed to
-select the next export, ensuring a fairness in the simulation.
+select the next export, ensuring fairness in the simulation.
 
 Concurrency is also supported as events from different export queues may be
 propagated at the same time. However, synchronization is required to guarantee

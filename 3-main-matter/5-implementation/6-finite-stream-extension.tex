@@ -31,9 +31,8 @@ Since extending \texttt{Stream}s is not allowed in Sodium,
 or an \texttt{EOS (End Of Stream)}, marking the termination of the stream. This
 implementation allows leveraging the \texttt{Stream} operators also for
 \texttt{FiniteStream}s, however, it does not restrict producers from emitting
-additional events after the first \texttt{EOS}. To solve this problem, the
-implementation takes care of discarding all the events following an
-\texttt{EOS}.
+additional events after the first \texttt{EOS}. To solve this problem, every
+event following the first \texttt{EOS} is automatically discarded.
 
 The \texttt{FiniteStreamExtension} provides a set of operators for creating
 \texttt{Finite\-Stream}s, implemented in the form of Scala's extension methods,

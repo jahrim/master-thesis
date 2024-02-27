@@ -20,7 +20,7 @@ specifications (i.e., combinations of FRASP constructs). Best practices
   \item \textit{reproducible}: always yielding the same results under the same
         initial conditions (i.e., \textit{determinism}). Non-determinism may
         cause a test to succeed under breaking changes or to fail even with
-        no changes.
+        no changes at all.
   \item \textit{finite}: yielding a result in a limited amount of time, ideally
         short for supporting frequent repeatability.
   \item \textit{automated}: executed each time a relevant (preferably small)
@@ -44,8 +44,8 @@ In this sense, the primary strategy employed in this project is
 aggregate towards an expected stable state. Convergence is a property that can
 be expressed in \textit{linear temporal logic} as $\lozenge \square P$
 (\enquote{\textit{sometimes P will hold forever}}). In particular, it may be
-interesting to validate the property $\lozenge \square \Psi_{expected}$,
-meaning that the outputs of an aggregate will eventually reach and hold the
-expectation $\Psi_{expected}$. However, convergence can only be validated for
-self-stabilising specifications (e.g., non-oscillating), assuming a finite
+interesting to evaluate the property $\lozenge \square \Psi_{expected}$,
+understanding if the outputs of an aggregate will eventually reach and hold the
+expectation $\Psi_{expected}$. However, convergence can only be verified for
+self-stabilizing specifications (e.g., non-oscillating), assuming a finite
 number of changes in the environment.

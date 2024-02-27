@@ -19,7 +19,7 @@ described by a transition system in which each transition is $N_{t}
    & \tau_t                             & : & \textrm{ the topology of the network at time t}                                & \\
    & \Sigma_t                           & : & \textrm{ the percepts of the sensors at time t}                                & \\
    & act::=\delta_{k} \textrm{ or } env & : & \textrm{ a change in the aggregate}                                            & \\
-   & \delta_{k}                         & : & \textrm{ a change due to the } k^{th} \textrm{ device broadcasting its export} & \\
+   & \delta_{k}                         & : & \textrm{ a change due to the } k^{th} \textrm{ device transmitting its export} & \\
    & env                                & : & \textrm{ a change in the environment}                                          & \\
 \end{align*}
 
@@ -45,8 +45,8 @@ therefore properties can be:
   \item \textit{global}: a property of the whole aggregate (e.g., \texttt{mid}
         should evaluate to the identifiers of all the devices in the network).
   \item \textit{regional}: a property of a group of devices in an aggregate
-        (e.g., \texttt{branch (isRed)\{obstacle\}\{???\}} should evaluate to
-        \texttt{obstacle} for all red devices in the network).
+        (e.g., \texttt{branch (isRed)\{obstacle\}\{somethingElse\}} should
+        evaluate to \texttt{obstacle} for all red devices in the network).
   \item \textit{individual}: a property of a single device in an aggregate
-        (e.g., device 0 should always be a source of potential).
+        (e.g., the $0^{th}$ device should always be a source of potential).
 \end{itemize}

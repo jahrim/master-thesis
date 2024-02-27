@@ -17,7 +17,7 @@ illustrated in Figure \ref{figure:convergence-simulator-class-diagram}.
 \end{figure}
 
 A \texttt{ConvergenceSimulator} is a \texttt{Simulator} with the additional
-ability of evaluating the stable state of an aggregate in self-stabilising
+ability of evaluating the stable state of an aggregate in self-stabilizing
 specifications, namely the method \texttt{computeLimit} (or its shorthand
 \texttt{lim}). The idea behind \texttt{computeLimit} is as simple as executing
 a simulation until its termination, returning the last export transmitted by
@@ -25,14 +25,14 @@ each device in the network, in the form of a \texttt{CollectiveExportMap}.
 Observation of the environment is possible by leveraging the device sensors
 within the specification, attaching their percepts to the device exports.
 However, to ensure that the result of \texttt{computeLimit} is a stable state
-of the aggregate, the specification should be self-stabilising and the
+of the aggregate, the specification should be self-stabilizing and the
 simulation should be halted after the aggregate has stabilized. Additionally,
 if the aggregate has multiple possible non-deterministic stable states,
 \texttt{computeLimit} can only evaluate one of them. Indeed, it may be useful
 to consider only the root of the device exports to reduce the number of stable
 states of the aggregate, possibly to a single deterministic stable state.
 
-Given a self-stabilising specification, the result of \texttt{computeLimit} is
+Given a self-stabilizing specification, the result of \texttt{computeLimit} is
 determined by the \texttt{HaltPolicy} in the configuration specified by the
 user. Below follows an analysis of the suitable \texttt{HaltPolicy}s and their
 effects, assuming the user has complete control over the environment:

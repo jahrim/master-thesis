@@ -21,15 +21,15 @@ computing are the following:
 \begin{itemize}
   \item \textit{Event-driven computation}: in a device, computation is driven
         by relevant changes in its perception of the environment (e.g.,
-        sensors, neighbour data). As a result, computation is performed
+        sensors and neighbour data). As a result, computation is performed
         only when required.
   \item \textit{Independent scheduling of sub-computations}: when a device
         detects a change in its context, only the dependent sub-computations
         of its programs are re-computed. In other words, complete
         re-computations of an aggregate specification are avoided when possible.
-  \item \textit{Minimal communication}: a device only broadcasts its exports
+  \item \textit{Minimal communication}: a device only transmits its exports
         upon relevant changes, avoiding further message exchanges after the
-        aggregate reaches a stable configuration. As a consequence, redundant
+        aggregate has reached a stable configuration. As a consequence, redundant
         computation caused by repeated messages is avoided.
 \end{itemize}
 
@@ -50,8 +50,9 @@ The semantics of FRASP (Listing \ref{listing:frasp-language}) faithfully
 resembles the semantics of field calculus, while also sharing common constructs
 with \ac{ScaFi}. However, since computational fields have been reified,
 additional operators are required to adapt values yielded by plain Scala
-expressions to the language constructs, namely \texttt{constant} for values and
-\texttt{lift} for operators (\textit{lifting}).
+expressions to the language constructs, namely \texttt{constant} for values,
+\texttt{map} for unary operators and \texttt{lift} for binary operators
+(\textit{explicit lifting}).
 
 The main difference with the field calculus semantics is the \texttt{loop}
 construct, replacing the \texttt{rep} construct. The \texttt{loop} construct
@@ -99,7 +100,7 @@ operates in two phases:
         taken to avoid the indefinite propagation of non-relevant changes
         (e.g., redundant messages). In particular, FRASP applies the FRP
         calming pattern to all nodes when building a computational graph,
-        allowing self-stabilising specifications to eventually reach a stable
+        allowing self-stabilizing specifications to eventually reach a stable
         state, in which events are no longer propagated in the aggregate until
         the next change in the environment. Note that the execution may
         continue indefinitely even after reaching a stable state, since it is
@@ -142,8 +143,8 @@ Since this project contributes to the implementation of FRASP, a brief overview
 of its architecture is due. Internally, FRASP is organized into the following
 three layered modules (Figure \ref{figure:frasp-modules}):
 \begin{itemize}
-  \item \texttt{frp}: provide extensions and abstractions over the \ac{FRP}
-        engine on which the framework depends.
+  \item \texttt{frp}: provide extensions and abstractions over the concrete
+        \ac{FRP} engine on which the framework depends.
   \item \texttt{core}: provide the model and implementation of the FRASP
         specification, as illustrated previously in Listing
         \ref{listing:frasp-language}.

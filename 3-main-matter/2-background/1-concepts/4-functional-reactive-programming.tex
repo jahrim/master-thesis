@@ -3,29 +3,28 @@
 \subsection{Functional Reactive Programming}
 \label{section:background:concepts:frp}
 
-\textbf{\ac{FRP}} is a subset of both \textbf{reactive programming} and
-\textbf{functional programming}, retaining the advantages of reactive
-programming, while promoting \textbf{compositionality}, which is a
-property of semantics, holding if the meaning of an expression is solely
-determined by the meaning of its parts and the rules used to combine them
-\cite{FRP}.
+\textbf{\ac{FRP}} is a subset of both \textit{reactive programming} and
+\textit{functional programming}, retaining the advantages of the former,
+while promoting \textbf{compositionality}, which is a property of semantics,
+holding if the meaning of an expression is solely determined by the meaning of
+its parts and the rules used to combine them \cite{FRP}.
 
 In functional programming, compositionality is achieved by expressing software
 behaviours as \textbf{pure functions}, that is functions in the mathematical
-sense of the term. Pure functions produce no observable side effects when
-applied and are \textbf{referentially transparent}, meaning that different
+sense of the term. Pure functions produce \textit{no observable side effects}
+when applied and are \textbf{referentially transparent}, meaning that different
 applications of a function to the same input always produce the same outputs.
 To attain referential transparence, functions should avoid referencing
 \textit{shared mutable data}, so that their behaviour is kept constant since
-their definition and has no side effects.
+their definition and cannot have side effects.
 
 In reactive programming, compositionality also requires glitch freedom, as
-observable glitches may invalidate the behaviour expressed by a function (e.g.,
-the behaviour of a function may change due to inconsistent handling of
-simultaneous events by the underlying evaluation model).
+observable glitches may invalidate the behaviour expressed by a function.
+Indeed, functions may express different behaviours due to inconsistent handling
+of simultaneous events by the underlying evaluation model.
 
 Compositionality is essential for dealing with complex software, tackling its
-complexity by composition of simpler components that are easier to reason
-about. Moreover, it deals with scalable software, tackling their growing
-complexity over time by facilitating the addition of new features to existing
-composable applications.
+complexity by combining simpler components that are easier to reason about.
+Moreover, it deals with scalable software, tackling their growing complexity
+over time by facilitating the addition of new features to existing composable
+applications.

@@ -1,5 +1,5 @@
 def collectNeighbors: Flow[Set[DeviceId]] =
-  nbr(mid).map(_.keys.toSet)
+  nbr(mid).map(_.values.toSet)
 
 def branchAndCollectNeighbors(cond: Flow[Boolean]): Flow[Set[DeviceId]] =
   branch(cond){ collectNeighbors }{ collectNeighbors }
