@@ -2,32 +2,8 @@
   // Build
   "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build",
   // Grammar
-  "ltex.language": "en-GB",
+  "ltex.language": "en-US",
   "ltex.additionalRules.enablePickyRules": true,
-  "ltex.dictionary": {
-    "en-GB": [
-      "FRASP",
-      "Rx",
-      "stigmergy",
-      "nbr",
-      "multidirectionality",
-      "declarativity",
-      "transparence",
-      "switchS",
-      "switchC",
-      "CellLoop",
-      "StreamLoop",
-      "CellSink",
-      "StreamSink",
-      "mixin",
-      "mixins",
-      "nbrvar",
-      "foldhood",
-      "ScaFi",
-      "mux",
-      "dinamicity"
-    ]
-  },
   // Formatting
   "editor.tabSize": 2,
   "editor.insertSpaces": true,

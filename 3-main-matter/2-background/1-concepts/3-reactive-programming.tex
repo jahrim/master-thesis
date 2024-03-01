@@ -26,13 +26,13 @@ graph} (shown in Figure \ref{figure:dependency-graph}), expressing the
 dependencies of the variable \texttt{var3} on the variables \texttt{var1} and
 \texttt{var2}, so that any future reassignment of \texttt{var1} or
 \texttt{var2} will be automatically reflected on the value of \texttt{var3},
-unlike standard imperative programming. Due to their non-standard behaviour,
+unlike standard imperative programming. Due to their non-standard behavior,
 variables in reactive programming are also called \textbf{reactive variables}.
 
-\begin{figure}[h]
+\begin{figure}[!ht]
   \centering
   \includegraphics[width=\textwidth]{resources/figures/dependency-graph.png}
-  \caption{
+  \caption[A computational graph in reactive programming]{
     A computational graph in reactive programming: nodes (\textit{circles})
     represent reactive variables and their current values; yellow nodes
     represent a propagation of change; underlined yellow nodes represent the
@@ -45,14 +45,14 @@ variables in reactive programming are also called \textbf{reactive variables}.
   \label{figure:dependency-graph}
 \end{figure}
 
-A value assigned to a reactive variable can be either a \textbf{behaviour},
-that is a time-varying value in continuous time (e.g., time itself), or an
+A value assigned to a reactive variable can be either a \textbf{behavior}, that
+is a time-varying value in continuous time (e.g., time itself), or an
 \textbf{event stream}, that is a potentially infinite sequence of events,
-occurring at discrete points in time (e.g., mouse clicks). Generally,
-behaviours are used to model time-varying states, which can always be sampled,
-while event streams are used to model state updates, which exist only in the
-discrete point in time when they are triggered. However, some implementations
-of reactive programming avoid such distinctions.
+occurring at discrete points in time (e.g., mouse clicks). Generally, behaviors
+are used to model time-varying states, which can always be sampled, while event
+streams are used to model state updates, which exist only in the discrete point
+in time when they are triggered. However, some implementations of reactive
+programming avoid such distinctions.
 
 In order to be applied to reactive variables, standard operators should be
 transformed into \textit{reactive operators}. Such transformation is called
@@ -63,14 +63,15 @@ programming languages changes depending on how lifting is implemented:
 variables as-is (transforming them under the hood); \textit{explicit lifting}
 provides a \textbf{lift} primitive to apply the transformation to a standard
 operator; \textit{manual lifting} does not implement lifting, requiring the
-developer to manually sample and compose the values of behaviours.
+developer to manually sample and compose the values of behaviors.
 
 Reactive operators are used to build the computational graph of a reactive
 program, creating dependencies between reactive variables. Some reactive
-programming implementations enjoy the property of \textbf{multidirectionality},
-allowing the definition of bidirectional dependencies or cyclic graphs. Some
-may support \textbf{switching}, allowing the definition of dynamic
-computational graphs, whose dependencies change over time.
+programming implementations enjoy the property of
+\textbf{multi-directionality}, allowing the definition of bidirectional
+dependencies or cyclic graphs. Some may support \textbf{switching}, allowing
+the definition of dynamic computational graphs, whose dependencies change over
+time.
 
 The \textbf{evaluation model} of a reactive programming language deals with the
 propagation of changes within a computational graph. Propagation of change
@@ -133,7 +134,7 @@ time a new event is triggered. Callbacks may also trigger other events,
 creating a dependency graph between callbacks. In fact, most reactive
 implementations are an abstraction over this pattern.}. In particular, the
 former hides how the propagation of change is implemented in the system,
-letting the developer focus solely on the behaviour of the program, while the
+letting the developer focus solely on the behavior of the program, while the
 latter requires the developer to manually implement dependencies as events that
 may trigger dependent events, resulting in a flow of control that is harder to
 understand and nested transitive dependencies that are harder to detect.

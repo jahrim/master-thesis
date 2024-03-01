@@ -21,7 +21,7 @@ computing are the following:
 \begin{itemize}
   \item \textit{Event-driven computation}: in a device, computation is driven
         by relevant changes in its perception of the environment (e.g.,
-        sensors and neighbour data). As a result, computation is performed
+        sensors and neighbor data). As a result, computation is performed
         only when required.
   \item \textit{Independent scheduling of sub-computations}: when a device
         detects a change in its context, only the dependent sub-computations
@@ -42,7 +42,7 @@ Computational fields are initialized by \texttt{Flow}s, which model
 sub-computations in an aggregate specification and are first-class citizens in
 FRASP. The purpose of \texttt{Flow}s is to defer the construction of the
 computational graph until the devices of the aggregate network are initialized,
-which is required to express dependencies related to their neighbours and
+which is required to express dependencies related to their neighbors and
 sensors. In addition, \texttt{Flow}s keep track of their position inside the
 FRASP specification, building the abstract syntax tree used for alignment.
 
@@ -60,11 +60,13 @@ implements the evolution of a computational field over time as a (cyclic)
 self-dependency within the computational graph of a FRASP specification, rather
 than relying on the concept of computation round. Indeed, the previous state of
 a device is computed through self-alignment, leveraging the fact that every
-device is a neighbour of itself.
+device is a neighbor of itself.
 
 \lstinputlisting[
   language=Scala,
-  caption={The core constructs of the FRASP language, represented as a trait,
+  caption={
+      [The core constructs of FRASP]
+      The core constructs of the FRASP language, represented as a trait,
       abstracting over the actual organization within FRASP.},
   captionpos=b,
   label={listing:frasp-language}
@@ -77,14 +79,14 @@ operates in two phases:
 \begin{itemize}
   \item \textbf{Configuration}: accept a FRASP specification, which describes
         the structure of a computational graph, and an environment, which
-        describes the devices of the aggregate and their neighbouring relations
+        describes the devices of the aggregate and their neighboring relations
         (e.g., based on proximity).
   \item \textbf{Execution}: create the devices, based on the environment, and
         build the computational graph of the aggregate, based on the FRASP
         specification. In doing so, the simulator establishes the dependency
-        chains from the percepts of each device (i.e., neighbour and
+        chains from the percepts of each device (i.e., neighbor and
         environmental data) to its exports and from its exports to the
-        neighbour data perceived by its neighbours. As soon as the graph is
+        neighbor data perceived by its neighbors. As soon as the graph is
         built, the \textit{input nodes}\footnote{
           An input node is node initialized by a leaf \texttt{Flow} in the
           abstract syntax tree of a FRASP specification: either
@@ -112,13 +114,13 @@ operates in two phases:
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.89\textwidth]{resources/figures/frasp-simulation.png}
-  \caption{
+  \caption[The reactive execution model of FRASP]{
     The reactive execution model of FRASP. In the diagram, three
-    devices (\textit{grey circles}) with neighbouring relations (\textit{solid
+    devices (\textit{gray circles}) with neighboring relations (\textit{solid
       lines}) are configured with an aggregate specification (\textit{blue
       circles}). For each device, the input of the specification is
-    neighbouring (\textit{nbrs}) and local environmental data (\textit{sense});
-    the output is the export trasmitted to neighbours (\textit{export}). In the
+    neighboring (\textit{nbrs}) and local environmental data (\textit{sense});
+    the output is the export transmitted to neighbors (\textit{export}). In the
     computational graph, there are internal (\textit{solid arrows}) and
     external (\textit{dashed arrows}) dependencies.
   }
@@ -128,13 +130,13 @@ operates in two phases:
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.89\textwidth]{resources/figures/frasp-simulation-example.png}
-  \caption{
+  \caption[A propagation of change in the reactive execution model of FRASP]{
     An example of propagation of change in the execution model of FRASP. The
     local environment of device 1 changed, causing changes to all its
     dependents. The three dots indicate that the change continues to
     propagate following the graph dependencies. Note how the
     propagation of change would carry on indefinitely in \textit{any} cyclic
-    graph without proper measures (e.g. calming pattern).
+    graph without proper measures (e.g., calming pattern).
   }
   \label{figure:frasp-simulation-example}
 \end{figure}
@@ -151,10 +153,10 @@ three layered modules (Figure \ref{figure:frasp-modules}):
   \item \texttt{simulation}: provide a basic simulator for running aggregate
         specifications over a network of devices.
 \end{itemize}
-\begin{figure}[h]
+\begin{figure}[!ht]
   \centering
   \includegraphics[width=1\textwidth]{resources/figures/frasp-modules.pdf}
-  \caption{The architecture of FRASP (image from the paper \cite{FRASP}).}
+  \caption[The architecture of FRASP]{The architecture of FRASP (image from the paper \cite{FRASP}).}
   \label{figure:frasp-modules}
 \end{figure}
 

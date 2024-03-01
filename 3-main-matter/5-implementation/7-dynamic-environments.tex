@@ -21,7 +21,7 @@ of the devices linked to a specific tag.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.8\textwidth]{resources/figures/environment-class-diagram.png}
-  \caption{
+  \caption[A UML class diagram of the environments types in FRASP]{
     A UML class diagram of the environment types available
     for simulation.
   }
@@ -39,12 +39,14 @@ already modified by previous programs, possibly causing unpredictable results.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.85\textwidth]{resources/figures/simulation-incarnation-class-diagram.png}
-  \caption{A UML class diagram of the new simulation incarnation.}
+  \caption[A UML class diagram of the updated simulation incarnation]{
+    A UML class diagram of the new \texttt{SimulationIncarnation}.
+  }
   \label{figure:simulation-incarnation-class-diagram}
 \end{figure}
 
 Additionally, the \texttt{SimulationIncarnation} has been improved to support
-the registration of local and neighbour sensors, retrieving localized
+the registration of local and neighbor sensors, retrieving localized
 information from the environment, instead of relying on information injected
 directly into the \texttt{Simu\-lationIncarnation}. In detail, local sensors
 are modelled by the trait \texttt{Simula\-tionLocalSensor}, which is a function
@@ -52,9 +54,8 @@ producing the readings of a given device in the environment. Local sensors can
 be registered to the \texttt{SimulationIncar\-nation} under a specific
 identifier, typed \texttt{SimulationLocalSensorId}, by which they can be
 referenced using the \texttt{sensor} construct within an aggregate
-specification. In a similar fashion, neighbour sensors are implemented by the
-traits \texttt{SimulationNeighbor\-Sensor} and
-\texttt{Simulation\-NeighborSensorId}.
+specification. Similarly, neighbor sensors are implemented by the traits
+\texttt{SimulationNeighbor\-Sensor} and \texttt{Simulation\-NeighborSensorId}.
 
 To enhance modularization and isolation of concerns, the implementation of the
 sensors has been extracted from the \texttt{SimulationIncarnation} and
@@ -73,7 +74,9 @@ for a \texttt{Sensor} if the \texttt{Environ\-ment} of the incarnation is a
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=1\textwidth]{resources/figures/sensor-class-diagram.png}
-  \caption{A UML class diagram of the sensor types available for simulation.}
+  \caption[A UML class diagram of the sensor types in FRASP]{
+    A UML class diagram of the sensor types available for simulation.
+  }
   \label{figure:sensor-class-diagram}
 \end{figure}
 
@@ -81,7 +84,7 @@ Some built-in sensors have already been implemented, namely \texttt{TagSensor},
 which is a \texttt{LocalSensor} detecting if a specific tag is linked to a
 device (e.g., if the device is marked as an obstacle or a source), and
 \texttt{NbrRangeSensor}, which is a \texttt{NeighborSensor} measuring the
-distances from a device and all of its neighbours.
+distances from a device and all of its neighbors.
 
 Finally, leveraging these concepts, two mixins for
 \texttt{SimulationIncarnation}s have been implemented, namely the

@@ -3,7 +3,7 @@
 \section{Observations}
 \label{section:verification:observations}
 
-The test suite yielded positive results, overall proving the FRASP library to
+The test suite yielded positive results, overall proving the FRASP language to
 be working as expected. However, the tests also confirmed a couple of issues,
 described in the following sections.
 
@@ -11,17 +11,17 @@ described in the following sections.
 
 The aggregate computing \ac{DSL} in FRASP enjoys referential transparence,
 granting compositionality for its constructs. As a consequence of referential
-transparence, the same behaviour can be defined by replacing the values of a
+transparence, the same behavior can be defined by replacing the values of a
 program with the constructs producing those values, like in the following
 example.
 
 \lstinputlisting[language=Scala, nolol=true]{resources/listings/branch-observation.txt}
 
 The above listing defines three specifications: \texttt{collectNeighbors}, for
-collecting the set of neighbours of all the devices (line 1);
+collecting the set of neighbors of all the devices (line 1);
 \texttt{branchAndCollectNeighbors}, for partitioning the network and then
-collecting the set of neighbours in each partition (line 4); finally,
-\texttt{collectNeighborsAndBranch}, for collecting the set of neighbours of all
+collecting the set of neighbors in each partition (line 4); finally,
+\texttt{collectNeighborsAndBranch}, for collecting the set of neighbors of all
 devices and then partitioning the network (line 7). Unexpectedly,
 \texttt{branchAndCollectNeighbors} and \texttt{collectNeighborsAndBranch} yield
 the same results, due to referential transparence (line 5 is semantically
@@ -31,7 +31,7 @@ not work as intended.
 While referential transparence is not at all a negative property, FRASP
 currently has no mechanisms to reference the results of other specifications
 within the local scopes of its constructs. In the example, the forks of a
-\texttt{branch} construct cannot access the set of neighbours collected before
+\texttt{branch} construct cannot access the set of neighbors collected before
 partitioning. This was a known issue\footnote{
 \url{https://github.com/cric96/distributed-frp/issues/1}}, confirmed by the
 test suite of FRASP.
@@ -62,7 +62,7 @@ inconsistent value starts an inconsistent evolution over time, concurrently
 with the others. This phenomenon can quickly build up, causing the simulation
 to never cease firing new events.
 
-Analysing this issue was especially difficult, since most affected
+Analyzing this issue was especially difficult, since most affected
 specifications in the test suite, including the gradient, achieve a robust
 convergence even with the inconsistent values, probably due to the type of
 operations involved in the specification (e.g., accumulating information by

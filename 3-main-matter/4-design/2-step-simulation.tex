@@ -13,10 +13,11 @@ every step (Figure \ref{figure:step-simulation}).
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=1\textwidth]{resources/figures/step-simulation.png}
-  \caption{The interface of a step simulation. Each device owns a queue of
+  \caption[The interface of a step simulation]{
+    The interface of a step simulation. Each device owns a queue of
     exports that need to be transmitted. In fact, when an export is produced, it
     is inserted in the queue of the corresponding device, instead of being
-    broadcast directly to its neighbours. The interface exposes new
+    broadcast directly to its neighbors. The interface exposes new
     functionalities for selecting, transmitting (\texttt{next}) and observing
     (\texttt{steps}) the next export from the queues, increasing observability
     (the user can be notified if there are no more exports to be transmitted)
@@ -41,7 +42,7 @@ In detail, the simulation maintains a queue of exports for each device, so that
 the device exports are pushed into the queue of the corresponding device when
 produced. The user can request the execution of the next \textbf{step} (i.e.,
 the propagation of the next export), then an export is extracted from one of
-the device queues and transmitted to the neighbours. For each request, the user
+the device queues and transmitted to the neighbors. For each request, the user
 is notified of the extracted export or the lack of pending exports through the
 reactive variable \texttt{steps}. Note how the system behaves exactly like the
 base reactive model of FRASP if a request is sent every time a new export is

@@ -13,7 +13,7 @@ tests have been implemented considering the best practices discussed in Section
 leveraging the ScalaTest framework \cite{ScalaTest}.
 
 As already anticipated in the analysis, the adopted strategy for verifying the
-correctness of the FRASP library is aggregate convergence tests, checking if
+correctness of the FRASP language is aggregate convergence tests, checking if
 the evolution of an aggregate converges towards an expected stable state, given
 an aggregate specification and a simulation configuration. Such tests are
 modelled by the mixin \texttt{ConvergenceTest} (Figure
@@ -39,7 +39,9 @@ namely:
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.8\textwidth]{resources/figures/convergence-test-class-diagram.png}
-  \caption{A UML class diagram of the convergent tests.}
+  \caption[A UML class diagram of the convergent tests]{
+    A UML class diagram of the convergent tests.
+  }
   \label{figure:convergent-test-class-diagram}
 \end{figure}
 
@@ -64,6 +66,7 @@ eliminated via default parameters, promoting simplicity and standardization.
 \lstinputlisting[
   language=Scala,
   caption={
+      [An application of convergence tests]
       An application of \texttt{ConvergenceTest}. First, at lines 2-8, the test
       prepares the aggregate computing \ac{DSL}, extended with standard sensors
       (such as the \texttt{Source} sensor) and algorithms (such as the

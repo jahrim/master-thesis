@@ -9,7 +9,7 @@ illustrated in Figure \ref{figure:convergence-simulator-class-diagram}.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.60\textwidth]{resources/figures/convergence-simulator-class-diagram.png}
-  \caption{
+  \caption[A UML class diagram of the convergence simulator]{
     A UML class diagram of the convergence simulator
     and its concrete types.
   }
@@ -75,11 +75,14 @@ in the following program (Listing \ref{listing:convergence-simulator-example}).
 
 \lstinputlisting[
   language=Scala,
-  caption={An application of \texttt{ConvergenceSimulator}. The program
+  caption={
+      [An application of the convergence simulator]
+      An application of \texttt{ConvergenceSimulator}. The program
       evaluates the stable states for three similar specifications
       (lines 21-23), in which each device counts all the integer numbers in a
       given range. For simplicity, the stable states only show the root of the
-      devices exports.},
+      devices exports.
+    },
   captionpos=b,
   label={listing:convergence-simulator-example}
 ]{resources/listings/convergence-simulator-example.txt}

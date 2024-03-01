@@ -9,7 +9,8 @@ diagram (Figure \ref{figure:concurrent-simulator-class-diagram}).
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=1\textwidth]{resources/figures/concurrent-simulator-class-diagram.png}
-  \caption{A UML class diagram of the concurrent simulator and its components.}
+  \caption[A UML class diagram of the concurrent simulator]{
+    A UML class diagram of the concurrent simulator and its components.}
   \label{figure:concurrent-simulator-class-diagram}
 \end{figure}
 
@@ -17,7 +18,7 @@ A \texttt{ConcurrentSimulator} is simply a \texttt{Simulator} whose
 \texttt{Simulation}s are executed concurrently. A basic implementation of a
 concurrent \texttt{Simulation} can be developed by leveraging an underlying
 \texttt{AsyncStepSimulation}. In detail, the transmission of the device exports
-to the neighbours and the user is delegated to an \texttt{ExecutionContext},
+to the neighbors and the user is delegated to an \texttt{ExecutionContext},
 which schedules the computation on a thread pool. Transmission is scheduled as
 soon as an export is generated, that is whenever the underlying simulation is
 \texttt{ready}. As a consequence, from the perspective of the user, the
@@ -46,7 +47,9 @@ the following program (Listing \ref{listing:concurrent-simulator-example}).
 
 \lstinputlisting[
   language=Scala,
-  caption={An application of \texttt{ConcurrentSimulator}. The program is very
+  caption={
+      [An application of the concurrent simulator]
+      An application of \texttt{ConcurrentSimulator}. The program is very
       similar to Listing \ref{listing:step-simulator-example}, however, note
       that the concurrent simulator accepts a different configuration (line 10).
       Additionally, the exports are generated continually by the provided

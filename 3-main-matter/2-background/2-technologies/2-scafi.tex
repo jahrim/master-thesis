@@ -16,8 +16,11 @@ whose methods represent the constructs of field calculus.
 
 \lstinputlisting[
   language=Scala,
-  caption={The core constructs of field calculus, represented as a trait,
-      abstracting over the actual organization within ScaFi.},
+  caption={
+      [The core constructs of field calculus in ScaFi]
+      The core constructs of field calculus, represented as a trait,
+      abstracting over the actual organization within ScaFi.
+    },
   captionpos=b,
   label={listing:scafi-field-calculus}
 ]{resources/listings/scafi-field-calculus.txt}
@@ -33,9 +36,9 @@ in space and time, obtained as the point-wise summation of a field of
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.55\textwidth]{resources/figures/constant-uniform-field.png}
-  \caption{
+  \caption[An example of computational field]{
     A graph representing an aggregate of devices (\textit{nodes}) and their
-    neighbouring relations (\textit{edges}). In particular, it represents the
+    neighboring relations (\textit{edges}). In particular, it represents the
     computational field yielded by the expression \enquote{$1+2$}
     (image from the site \cite{ScaFi-Documentation}).
   }
@@ -46,18 +49,20 @@ Despite being equivalent, the semantics of \ac{ScaFi} differs from the
 semantics of field calculus for some operators: evolution over space is
 implemented with a combination of the \texttt{nbr} and \texttt{foldhood}
 operators, the latter leveraging the former to accumulate the values of
-neighbours in each device (i.e., \texttt{nbr} does not yield a neighbouring
-value directly as in field calculus); restriction is implemented using the
+neighbors in each device (i.e., \texttt{nbr} does not yield a neighboring value
+directly as in field calculus); restriction is implemented using the
 \texttt{aggregate} operator, which handles selective partitioning; evolution
 over time with \texttt{rep} follows the same semantics as in field calculus.
+This variant of field calculus assumes the name of \textbf{neighbors calculus}
+\cite{NeighborsCalculus}.
 
 Additionally, \ac{ScaFi} provides contextual operators that handle interactions
 with the underlying platform, namely \texttt{mid}, which computes the field of
 the device identifiers; \texttt{sense}, which computes a field of the values
 perceived by a specific sensor from the environment (e.g., a field of
 temperatures); and \texttt{nbrvar}, which computes a field mapping each
-neighbour to a value perceived by a specific sensor from the environment (e.g.,
-a field of distances with each neighbour).
+neighbor to a value perceived by a specific sensor from the environment (e.g.,
+a field of distances with each neighbor).
 
 The core \ac{DSL} can be extended with \textbf{mixins} to provide higher-level
 primitives and operators. \ac{ScaFi} already includes some built-in extensions,
@@ -66,8 +71,11 @@ such as the resilient aggregate computing blocks (Listing
 
 \lstinputlisting[
   language=Scala,
-  caption={The core constructs of aggregate computing, represented as a mixin
-      for field calculus, abstracting the actual organization within ScaFi.},
+  caption={
+      [The core constructs of aggregate computing in ScaFi]
+      The core constructs of aggregate computing, represented as a mixin
+      for field calculus, abstracting the actual organization within ScaFi.
+    },
   captionpos=b,
   label={listing:scafi-aggregate-computing}
 ]{resources/listings/scafi-aggregate-computing.txt}
@@ -80,8 +88,8 @@ expression of field calculus (relying on
 \texttt{aggregate})\footnote{Conditional computation without partitioning is
 implemented by the \texttt{mux} operator instead, which is equivalent to an
 \textit{if-then-else} expression in Scala.}; and a new \texttt{share} operator,
-which handles the evolution over time of a neighbouring value (indeed a
-combination of the behaviours of \texttt{rep} and \texttt{nbr} in field
+which handles the evolution over time of a neighboring value (indeed a
+combination of the behaviors of \texttt{rep} and \texttt{nbr} in field
 calculus, albeit much more efficient \cite{ScaFi-ShareOperator}).
 
 The execution of a \ac{ScaFi} specification is performed by the underlying
@@ -93,7 +101,7 @@ of the following three steps in order:
   \item \textbf{sense}: the device updates its current \textbf{context} (i.e.,
         all known information from its perspective), by retrieving its previous
         output, the information perceived through its \textit{sensors} from the
-        local environment and the messages transmitted by neighbouring devices.
+        local environment and the messages transmitted by neighboring devices.
   \item \textbf{compute}: the device computes its current output by executing
         the aggregate specification against its current context. The output of
         a device is an abstract syntax tree, tracking the structure of the
@@ -101,7 +109,7 @@ of the following three steps in order:
         of the tree contains the final result of the computation, while the
         roots of its subtrees contain the results of sub-computations.
   \item \textbf{interact}: the device broadcasts some information extracted
-        from its output (called an \textbf{export}) to neighbouring devices and
+        from its output (called an \textbf{export}) to neighboring devices and
         updates the local environment through its \textit{actuators}. The
         exports can be derived from the output of the device by searching in the
         abstract syntax tree for operations involving communication (e.g.,

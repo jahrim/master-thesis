@@ -11,7 +11,7 @@ provides full compositionality compared to other implementations (e.g., Reactive
 Extensions (Rx)\footnote{Repository at: \url{https://github.com/ReactiveX}},
 which is not glitch-free) \cite{FRP}.
 
-In Sodium, behaviours are modelled as \textbf{cells} with denotation
+In Sodium, behaviors are modelled as \textbf{cells} with denotation
 \texttt{Cell[V]}, indicating a time-varying value of type \texttt{V}, while
 event streams are modelled as simply \textbf{streams} with denotation
 \texttt{Stream[E]}, indicating a sequence of emissions of events of type
@@ -75,10 +75,13 @@ combining \texttt{Cell}s and \texttt{Stream}s. These include:
 
 \lstinputlisting[
   language=Scala,
-  caption={An abstract view on the Sodium primitives for constructing static
+  caption={
+      [Sodium's primitives for static acyclic graphs]
+      An abstract view on the Sodium primitives for constructing static
       acyclic computational graphs. Some primitives can be derived as a
       combination of the others (e.g., \texttt{constant} and
-      \texttt{snapshot}).},
+      \texttt{snapshot}).
+    },
   captionpos=b,
   label={listing:sodium-basic}
 ]{resources/listings/sodium-basic.txt}
@@ -96,8 +99,11 @@ works similarly for \texttt{Cell} of \texttt{Cell}s.
 
 \lstinputlisting[
   language=Scala,
-  caption={An abstract view on the Sodium primitives for constructing dynamic
-      computational graphs.},
+  caption={
+      [Sodium's primitives for dynamic graphs]
+      An abstract view on the Sodium primitives for constructing dynamic
+      computational graphs.
+    },
   captionpos=b,
   label={listing:sodium-switching}
 ]{resources/listings/sodium-switching.txt}
@@ -118,8 +124,11 @@ assigned within the same transaction.
 
 \lstinputlisting[
   language=Scala,
-  caption={An abstract view on the Sodium primitives for constructing cyclic
-      computational graphs.},
+  caption={
+      [Sodium's primitives for cyclic graphs]
+      An abstract view on the Sodium primitives for constructing cyclic
+      computational graphs.
+    },
   captionpos=b,
   label={listing:sodium-looping}
 ]{resources/listings/sodium-looping.txt}
@@ -146,7 +155,10 @@ preserve compositionality.
 
 \lstinputlisting[
   language=Scala,
-  caption={An abstract view on the Sodium operational primitives.},
+  caption={
+      [Sodium's operational primitives]
+      An abstract view on the Sodium operational primitives.
+    },
   captionpos=b,
   label={listing:sodium-operational}
 ]{resources/listings/sodium-operational.txt}
@@ -173,7 +185,7 @@ particular, Sodium promises to solve the following problems:
   \item \textit{Missed first event}: it is difficult to guarantee that
         callbacks are registered before the first event. Sodium can solve the
         problem by initializing the program within a transaction.
-  \item \textit{Messy state}: callbacks tend to describe behaviours as state
+  \item \textit{Messy state}: callbacks tend to describe behaviors as state
         machines, which are difficult to maintain. Sodium solves the problem
         using the declarativity of the \ac{FRP} paradigm.
   \item \textit{Threading issues}: executing callbacks concurrently may lead to
