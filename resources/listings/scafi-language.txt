@@ -1,0 +1,5 @@
+trait ScafiLanguage:
+  self: FieldCalculus with AggregateComputing:
+  def branch[E](cond: => Boolean)(th: => E)(el: => E): E
+  def mux[E](cond: => Boolean)(th: => E)(el: => E): E
+  def share[E](exp: => E)(evolve: (E, () => E) => E): E

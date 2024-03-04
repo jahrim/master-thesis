@@ -1,0 +1,9 @@
+var g = 0    // mutable shared data
+def ro() =
+  g = g + 1  // observable side-effect
+  10 * g
+
+// Application
+val x = ro()          // 10
+val y1 = x + x        // 10 + 10 = 20
+val y2 = ro() + ro()  // 20 + 30 = 50

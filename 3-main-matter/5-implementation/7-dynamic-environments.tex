@@ -20,12 +20,21 @@ of the devices linked to a specific tag.
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{resources/figures/environment-class-diagram.png}
+  \includegraphics[width=1\textwidth]{resources/figures/diagrams/short/environment-class-diagram.pdf}
   \caption[A UML class diagram of the environments types in FRASP]{
     A UML class diagram of the environment types available
     for simulation.
   }
   \label{figure:environment-class-diagram}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=1\textwidth]{resources/figures/diagrams/short/simulation-incarnation-class-diagram.pdf}
+  \caption[A UML class diagram of the updated simulation incarnation]{
+    A UML class diagram of the new \texttt{SimulationIncarnation}.
+  }
+  \label{figure:simulation-incarnation-class-diagram}
 \end{figure}
 
 With the introduction of dynamic environments, the
@@ -36,20 +45,11 @@ type, instead of an environment instance (Figure
 specifications, as any program would be executed on the same environment,
 already modified by previous programs, possibly causing unpredictable results.
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.85\textwidth]{resources/figures/simulation-incarnation-class-diagram.png}
-  \caption[A UML class diagram of the updated simulation incarnation]{
-    A UML class diagram of the new \texttt{SimulationIncarnation}.
-  }
-  \label{figure:simulation-incarnation-class-diagram}
-\end{figure}
-
 Additionally, the \texttt{SimulationIncarnation} has been improved to support
 the registration of local and neighbor sensors, retrieving localized
 information from the environment, instead of relying on information injected
 directly into the \texttt{Simu\-lationIncarnation}. In detail, local sensors
-are modelled by the trait \texttt{Simula\-tionLocalSensor}, which is a function
+are modeled by the trait \texttt{Simula\-tionLocalSensor}, which is a function
 producing the readings of a given device in the environment. Local sensors can
 be registered to the \texttt{SimulationIncar\-nation} under a specific
 identifier, typed \texttt{SimulationLocalSensorId}, by which they can be
@@ -60,7 +60,7 @@ specification. Similarly, neighbor sensors are implemented by the traits
 To enhance modularization and isolation of concerns, the implementation of the
 sensors has been extracted from the \texttt{SimulationIncarnation} and
 delegated to specific traits (Figure \ref{figure:sensor-class-diagram}). In
-particular, sensors are modelled by the trait \texttt{Sensor}, which declares
+particular, sensors are modeled by the trait \texttt{Sensor}, which declares
 the type of environment where the sensor can be employed, namely
 \texttt{SuitableEnviron\-ment}. A \texttt{Sensor} can be either a
 \texttt{LocalSensor}, creating the corresponding
@@ -69,11 +69,11 @@ the type of environment where the sensor can be employed, namely
 corresponding \texttt{SimulationNeighborSensor} for suitable
 \texttt{Simulation\-Incarnation}s. A \texttt{SimulationIncarnation} is suitable
 for a \texttt{Sensor} if the \texttt{Environ\-ment} of the incarnation is a
-\texttt{SuitableEnvironment} for the sensor.
+\texttt{SuitableEnvironment}.
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=1\textwidth]{resources/figures/sensor-class-diagram.png}
+  \includegraphics[width=1\textwidth]{resources/figures/diagrams/short/sensor-class-diagram.pdf}
   \caption[A UML class diagram of the sensor types in FRASP]{
     A UML class diagram of the sensor types available for simulation.
   }

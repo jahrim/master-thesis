@@ -29,7 +29,7 @@ equivalent to lines 8-9). In summary, \texttt{collectNeighborsAndBranch} does
 not work as intended.
 
 While referential transparence is not at all a negative property, FRASP
-currently has no mechanisms to reference the results of other specifications
+currently has no mechanisms for referencing the results of other specifications
 within the local scopes of its constructs. In the example, the forks of a
 \texttt{branch} construct cannot access the set of neighbors collected before
 partitioning. This was a known issue\footnote{
@@ -66,7 +66,7 @@ Analyzing this issue was especially difficult, since most affected
 specifications in the test suite, including the gradient, achieve a robust
 convergence even with the inconsistent values, probably due to the type of
 operations involved in the specification (e.g., accumulating information by
-evaluating the maximum value).
+evaluating the minimum value).
 
 An example of highly susceptible specification is the following.
 

@@ -13,18 +13,43 @@ In functional programming, compositionality is achieved by expressing software
 behaviors as \textbf{pure functions}, that is functions in the mathematical
 sense of the term. Pure functions produce \textit{no observable side effects}
 when applied and are \textbf{referentially transparent}, meaning that different
-applications of a function to the same input always produce the same outputs.
+applications of a function to the same inputs always produce the same outputs.
 To attain referential transparence, functions should avoid referencing
 \textit{shared mutable data}, so that their behavior is kept constant since
-their definition and cannot have side effects.
+their definition and cannot have side effects (Listing
+\ref{listing:referential-transparence}).
+
+\begin{figure}[!ht]
+  \noindent
+  \begin{minipage}{0.49\textwidth}
+    \lstinputlisting[language=Scala,nolol=true,frameround=fftt]{resources/listings/referential-transparence-example.txt}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.49\textwidth}
+    \lstinputlisting[language=Scala,nolol=true,numbers=none,frameround=ttff]{resources/listings/referential-opaqueness-example.txt}
+  \end{minipage}
+  \begin{lstlisting}[
+    belowskip=0em,
+    aboveskip=0em,
+    caption={
+      [An example of referential transparence]
+      An example of referentially transparent (\textit{left}) and referentially
+      opaque (\textit{right}) functions. Note how referential transparence
+      allows replacing any value with a call to the function that produced it.
+    },
+    label={listing:referential-transparence},
+    frame=none
+  ]
+\end{lstlisting}
+\end{figure}
 
 In reactive programming, compositionality also requires glitch freedom, as
 observable glitches may invalidate the behavior expressed by a function.
 Indeed, functions may express different behaviors due to inconsistent handling
 of simultaneous events by the underlying evaluation model.
 
-Compositionality is essential for dealing with complex software, tackling its
+Compositionality is essential for dealing with complex software, addressing its
 complexity by combining simpler components that are easier to reason about.
-Moreover, it deals with scalable software, tackling their growing complexity
-over time by facilitating the addition of new features to existing composable
+Moreover, it deals with scalable software, tackling its growing complexity over
+time by facilitating the addition of new features to existing composable
 applications.

@@ -14,11 +14,11 @@ underlying execution model.
 Consider the following program for computing the sum of two variables.
 
 \begin{lstlisting}
-  var1 = 1
-  var2 = 2
-  var3 = var1 + var2  # var3: 3
-  var1 = 3            # var3: 5
-  var2 = 1            # var3: 4
+var1 = 1
+var2 = 2
+var3 = var1 + var2  # var3: 3
+var1 = 3            # var3: 5
+var2 = 1            # var3: 4
 \end{lstlisting}
 
 In reactive programming, the program is translated into a \textbf{computational
@@ -31,7 +31,7 @@ variables in reactive programming are also called \textbf{reactive variables}.
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=\textwidth]{resources/figures/dependency-graph.png}
+  \includegraphics[width=\textwidth]{resources/figures/dependency-graph.pdf}
   \caption[A computational graph in reactive programming]{
     A computational graph in reactive programming: nodes (\textit{circles})
     represent reactive variables and their current values; yellow nodes
@@ -48,7 +48,7 @@ variables in reactive programming are also called \textbf{reactive variables}.
 A value assigned to a reactive variable can be either a \textbf{behavior}, that
 is a time-varying value in continuous time (e.g., time itself), or an
 \textbf{event stream}, that is a potentially infinite sequence of events,
-occurring at discrete points in time (e.g., mouse clicks). Generally, behaviors
+occurring at discrete points in time (e.g., mouse clicks). Typically, behaviors
 are used to model time-varying states, which can always be sampled, while event
 streams are used to model state updates, which exist only in the discrete point
 in time when they are triggered. However, some implementations of reactive
@@ -67,7 +67,7 @@ developer to manually sample and compose the values of behaviors.
 
 Reactive operators are used to build the computational graph of a reactive
 program, creating dependencies between reactive variables. Some reactive
-programming implementations enjoy the property of
+programming implementations possess the property of
 \textbf{multi-directionality}, allowing the definition of bidirectional
 dependencies or cyclic graphs. Some may support \textbf{switching}, allowing
 the definition of dynamic computational graphs, whose dependencies change over
@@ -75,7 +75,7 @@ time.
 
 The \textbf{evaluation model} of a reactive programming language deals with the
 propagation of changes within a computational graph. Propagation of change
-always involves a \textbf{producer} to trigger the change (i.e., a dependency)
+always involves a \textbf{producer} to trigger a change (i.e., a dependency)
 and a \textbf{consumer} to react to the change (i.e., a dependent). The
 evaluation model can be categorized based on the roles of the two entities:
 \begin{itemize}
@@ -97,10 +97,10 @@ updated before all of its dependencies are up-to-date, resulting in a
 combination of new and stale events. Consider the following example.
 
 \begin{lstlisting}
-  var1 = 1
-  var2 = var1 * 1     # var2: 1
-  var3 = var1 + var2  # var3: 2
-  var1 = 2            # var3: 3 (glitch); var2: 2; var3: 4 (correct)
+var1 = 1
+var2 = var1 * 1     # var2: 1
+var3 = var1 + var2  # var3: 2
+var1 = 2            # var3: 3 (glitch); var2: 2; var3: 4 (correct)
 \end{lstlisting}
 
 In the example, when \texttt{var1} is reassigned (line 4), the propagation of
@@ -132,9 +132,9 @@ which consumers react to events by registering some callbacks
 (\textit{listeners}) to the event producers, so that they may be executed each
 time a new event is triggered. Callbacks may also trigger other events,
 creating a dependency graph between callbacks. In fact, most reactive
-implementations are an abstraction over this pattern.}. In particular, the
-former hides how the propagation of change is implemented in the system,
-letting the developer focus solely on the behavior of the program, while the
-latter requires the developer to manually implement dependencies as events that
-may trigger dependent events, resulting in a flow of control that is harder to
+implementations are an abstraction of this pattern.}. In particular, the former
+hides how the propagation of change is implemented in the system, letting the
+developer focus solely on the behavior of the program, while the latter
+requires the developer to manually implement dependencies as events that may
+trigger dependent events, resulting in a flow of control that is harder to
 understand and nested transitive dependencies that are harder to detect.

@@ -9,8 +9,8 @@ providing a usable internal \ac{DSL} for aggregate specifications and a
 platform for the simulation and execution of such specifications
 \cite{ScaFi-Documentation}.
 
-In \ac{ScaFi}, the core concepts of field calculus are modelled by a
-\textbf{trait} (i.e., an interface) like the one reported in Listing
+In \ac{ScaFi}, the core concepts of field calculus are modeled by a
+\textbf{trait} like the one reported in Listing
 \ref{listing:scafi-field-calculus} \cite{FieldCalculus-AggregateComputing},
 whose methods represent the constructs of field calculus.
 
@@ -33,9 +33,9 @@ in space and time, obtained as the point-wise summation of a field of
 \enquote{$1$}s and a field of \enquote{$2$}s (Figure
 \ref{figure:constant-uniform-field}).
 
-\begin{figure}[h]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.55\textwidth]{resources/figures/constant-uniform-field.png}
+  \includegraphics[width=0.8\textwidth]{resources/figures/constant-uniform-field.pdf}
   \caption[An example of computational field]{
     A graph representing an aggregate of devices (\textit{nodes}) and their
     neighboring relations (\textit{edges}). In particular, it represents the
@@ -67,7 +67,8 @@ a field of distances with each neighbor).
 The core \ac{DSL} can be extended with \textbf{mixins} to provide higher-level
 primitives and operators. \ac{ScaFi} already includes some built-in extensions,
 such as the resilient aggregate computing blocks (Listing
-\ref{listing:scafi-aggregate-computing}).
+\ref{listing:scafi-aggregate-computing}) and some derived operators (Listing
+\ref{listing:scafi-language}).
 
 \lstinputlisting[
   language=Scala,
@@ -80,41 +81,68 @@ such as the resilient aggregate computing blocks (Listing
   label={listing:scafi-aggregate-computing}
 ]{resources/listings/scafi-aggregate-computing.txt}
 
+\lstinputlisting[
+  language=Scala,
+  caption={
+      [The core constructs of ScaFi]
+      The core constructs of the ScaFi language, represented as a trait,
+      abstracting over the actual organization within ScaFi.
+    },
+  captionpos=b,
+  label={listing:scafi-language}
+]{resources/listings/scafi-language.txt}
+
 The higher-level primitives in \ac{ScaFi} include but are not limited to the
 already presented \texttt{G}, \texttt{C} and \texttt{T} blocks of aggregate
 computing; an additional \texttt{S} block, which handles sparse leader election
 based on proximity; a \texttt{branch} operator, implementing the branching
 expression of field calculus (relying on
 \texttt{aggregate})\footnote{Conditional computation without partitioning is
-implemented by the \texttt{mux} operator instead, which is equivalent to an
+implemented by the \texttt{mux} operator instead, which is similar to an
 \textit{if-then-else} expression in Scala.}; and a new \texttt{share} operator,
 which handles the evolution over time of a neighboring value (indeed a
 combination of the behaviors of \texttt{rep} and \texttt{nbr} in field
 calculus, albeit much more efficient \cite{ScaFi-ShareOperator}).
 
 The execution of a \ac{ScaFi} specification is performed by the underlying
-platform, which adopts an \textit{asynchronous} \textbf{round-based} execution
-model, in which a round is the computation required for an individual device to
-produce its next output based on the aggregate specification. A round consists
-of the following three steps in order:
+platform, which adopts a \textbf{round-based} execution model (Figure
+\ref{figure:round-based-execution-model}), in which a \textbf{round} is the
+computation required for an individual device to produce its next output based
+on the aggregate specification. Rounds are executed \textit{asynchronously},
+with timing determined by the scheduler of the platform. A round consists of
+the following three steps in order:
 \begin{enumerate}
-  \item \textbf{sense}: the device updates its current \textbf{context} (i.e.,
-        all known information from its perspective), by retrieving its previous
-        output, the information perceived through its \textit{sensors} from the
+  \item \textbf{Sense}: the device updates its current \textbf{context} (i.e.,
+        all known information from its perspective), by retrieving its
+        \textit{state} (i.e., its previous output), the information perceived
+        through its \textit{sensors} from the
         local environment and the messages transmitted by neighboring devices.
-  \item \textbf{compute}: the device computes its current output by executing
+  \item \textbf{Compute}: the device computes its current output by executing
         the aggregate specification against its current context. The output of
         a device is an abstract syntax tree, tracking the structure of the
         executed aggregate specification for alignment. In particular, the root
         of the tree contains the final result of the computation, while the
         roots of its subtrees contain the results of sub-computations.
-  \item \textbf{interact}: the device broadcasts some information extracted
+  \item \textbf{Interact}: the device broadcasts some information extracted
         from its output (called an \textbf{export}) to neighboring devices and
         updates the local environment through its \textit{actuators}. The
         exports can be derived from the output of the device by searching in the
         abstract syntax tree for operations involving communication (e.g.,
         subtrees depending on \textbf{nbr}).
 \end{enumerate}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.90\textwidth]{resources/figures/round-based-execution-model.pdf}
+  \caption[The round-based execution model of ScaFi]{
+    The round-based execution model of ScaFi (image from the paper
+    \cite{RoundBasedExecution}). The diagram includes logical components
+    (\textit{solid rectangular boxes}), activities (\textit{solid rounded boxes}),
+    devices (\textit{dashed rounded boxes}), flow of control (\textit{solid arrows}),
+    and flow of data (\textit{dashed arrows}).
+  }
+  \label{figure:round-based-execution-model}
+\end{figure}
 
 Support for simulation is also implemented by several \ac{ScaFi} modules or
 through integration with third-party simulators (e.g.,

@@ -3,14 +3,15 @@
 \section{Concurrent Simulator}
 \label{section:implementation:concurrent-simulator}
 
-The implementation of a concurrent simulator is shown in the following class
-diagram (Figure \ref{figure:concurrent-simulator-class-diagram}).
+The implementation of a concurrent simulator is described by the class diagram
+in Figure \ref{figure:concurrent-simulator-class-diagram}.
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=1\textwidth]{resources/figures/concurrent-simulator-class-diagram.png}
+  \includegraphics[width=1\textwidth]{resources/figures/diagrams/short/concurrent-simulator-class-diagram.pdf}
   \caption[A UML class diagram of the concurrent simulator]{
-    A UML class diagram of the concurrent simulator and its components.}
+    A UML class diagram of the concurrent simulator and its components.
+  }
   \label{figure:concurrent-simulator-class-diagram}
 \end{figure}
 
@@ -31,8 +32,8 @@ as better discussed in Section \ref{section:design:concurrent-simulation} of
 the design.
 
 The \texttt{SimulationConfiguration} of a concurrent \texttt{Simulation} is
-modelled by the class \texttt{ConcurrentSimulationConfiguration}. In addition
-to the \texttt{Environment} and \texttt{HaltPolicy}, the configuration includes
+modeled by the class \texttt{ConcurrentSimulationConfiguration}. In addition to
+the \texttt{Environment} and \texttt{HaltPolicy}, the configuration includes
 the \texttt{ExecutionContext} where the simulation will be executed. Some
 built-in \texttt{HaltPolicy}s are already defined in the corresponding
 simulator component, including \texttt{never}, \texttt{haltWhen} and two

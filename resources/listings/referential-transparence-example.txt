@@ -1,0 +1,9 @@
+def rt() = 10
+
+
+
+
+// Application
+val x = rt()          // 10
+val y1 = x + x        // 10 + 10 = 20
+val y2 = rt() + rt()  // 10 + 10 = 20

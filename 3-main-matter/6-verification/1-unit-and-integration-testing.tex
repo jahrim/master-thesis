@@ -16,7 +16,7 @@ As already anticipated in the analysis, the adopted strategy for verifying the
 correctness of the FRASP language is aggregate convergence tests, checking if
 the evolution of an aggregate converges towards an expected stable state, given
 an aggregate specification and a simulation configuration. Such tests are
-modelled by the mixin \texttt{ConvergenceTest} (Figure
+modeled by the mixin \texttt{ConvergenceTest} (Figure
 \ref{figure:convergent-test-class-diagram}), which can be extended to provide
 the inheriting class with methods for creating tests based on convergence,
 namely:
@@ -32,13 +32,12 @@ namely:
         implementation of a specification).
   \item \texttt{convergentEquivalenceTest}: similar to
         \texttt{convergenceTest}, but it checks if different aggregate
-        specifications converge to the same limit, using the same
-        configuration.
+        specifications converge to the same limit.
 \end{itemize}
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{resources/figures/convergence-test-class-diagram.png}
+  \includegraphics[width=1\textwidth]{resources/figures/diagrams/short/convergence-test-class-diagram.pdf}
   \caption[A UML class diagram of the convergent tests]{
     A UML class diagram of the convergent tests.
   }

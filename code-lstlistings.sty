@@ -22,8 +22,24 @@
   numbersep=10pt,
   tabsize=2,
   extendedchars=true,
-  frame=trBL,
-  frameround=fttt,
+  frame=trbl,
+  frameround=tttt,
+}
+
+\lstdefinelanguage{Yaml}{
+  keywords={true,false,null,y,n},
+  identifierstyle=\color{blue},
+  ndkeywordstyle=\color{black},
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  moredelim=[l][\color{orange}]{\&},
+  moredelim=[l][\color{magenta}]{*},
+  moredelim=**[il][\color{black}{:}\color{black}]{:},
+  morestring=[b]',
+  morestring=[b]",
+  % literate = {---}{{\ProcessThreeDashes}}3 {>}{{\textcolor{red}\textgreater}}1
+  % {|}{{\textcolor{red}\textbar}}1 {\ -\ }{{\mdseries\ -\ }}3,
 }
 
 \lstdefinelanguage{Kotlin}{

@@ -12,18 +12,8 @@ as pure functions, and fluency, integrating them into the existing
 because inheritance of the base types of \texttt{Sodium} is not allowed.
 
 The collection of implemented extension methods is provided by the
-\texttt{StreamEx\-tension} object, as illustrated in Figure
-\ref{figure:stream-extension-class-diagram}.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.8\textwidth]{resources/figures/stream-extension-class-diagram.png}
-  \caption[A UML class diagram of the stream extension]{
-    A UML class diagram of the \texttt{StreamExtension}
-    and its operators.
-  }
-  \label{figure:stream-extension-class-diagram}
-\end{figure}
+\texttt{StreamEx\-tension} object, which defines the operators discussed in the
+following sections.
 
 \subsection{Persistence Operators}
 
@@ -34,19 +24,19 @@ The following operators can be used to deal with state persistence in
   \item \texttt{collect}: evolve an initial state \texttt{init} as the
         input \texttt{Stream} $s$ generates new events and return an output
         \texttt{Stream} $s'$, whose events are a combination of the events
-        fired by $s$ with the current state at the moment of firing. The
-        \texttt{acc} function defines both the evolution of the state and the
-        events of $s'$ depending on the firings of $s$.
+        fired by $s$ with the current state at the moment of firing. The given
+        \texttt{accumulator} function defines both the evolution of the state
+        and the events of $s'$ depending on the firings of $s$.
 
         The \texttt{collect} operator is an adaptation for Scala of the
         homonymous operator provided by \texttt{Sodium} in Java.
 
   \item \texttt{fold}: a simplification of the \texttt{collect}
         operator, in which the events of the output \texttt{Stream} $s'$ are a
-        snapshot of the current state taken at each firing of the input
-        \texttt{Stream} $s$. The \texttt{acc} function defines the evolution of
-        the state depending on the firings of $s$, and the events of $s'$ as a
-        consequence.
+        snapshot of the current state, taken at each firing of the input
+        \texttt{Stream} $s$. The given \texttt{accumulator} function defines
+        the evolution of the state depending on the firings of $s$, and the
+        events of $s'$ as a consequence.
 
         The \texttt{fold} operator is an implementation of the \textit{folding}
         operation provided by Scala for all \texttt{Iterable}s. However, the
@@ -67,7 +57,7 @@ The following operators can be used to perform time-sensitive analysis on
   \item \texttt{zipWithIndex}: when applied to an input \texttt{Stream} $s$,
         return an output \texttt{Stream} $s'$, whose events are the same events
         of $s$ paired with the discrete time when they were fired. Discrete
-        time is modelled as the number of firings preceding an event in $s$.
+        time is modeled as the number of firings preceding an event in $s'$.
   \item \texttt{zipWithTime}: when applied to a \texttt{Stream} $s$, return an
         output \texttt{Stream} $s'$, whose events are the same events of $s$
         paired with the continuous time when they were fired. Continuous time

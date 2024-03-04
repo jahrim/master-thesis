@@ -3,10 +3,6 @@
 \chapter{Introduction}
 \label{chapter:introduction}
 
-This chapter provides a summary of the content and organization of this thesis,
-describing the context, motivations and high-level goals of this project and
-how they are presented in this document.
-
 \section{Motivation and Goals}
 \label{section:introduction:content}
 
@@ -15,20 +11,22 @@ distributed systems, called collective adaptive systems, with application
 domains such as smart cities, complex sensor networks and the \ac{IoT}
 \cite{CAS-AggregateComputingBlocks}. The complexity of these systems calls for
 new programming paradigms better suited for large-scale distributed systems,
-such as aggregate computing \cite{FieldCalculus-AggregateComputing}.
+such as aggregate computing \cite{FieldCalculus-AggregateComputing}, whose
+specifications directly describe robust collective behaviors for networks of
+devices.
 
 Most state-of-the-art aggregate computing frameworks rely on a round-based
 computation model, which is simple, but limited in terms of flexibility and
 efficiency. To provide for the shortcomings of the round-based computation
 model, new reactive approaches are currently in research, such as the FRASP
-(Functional Reactive Approach to Self-organization Programming) domain-specific
-language \cite{FRASP}, which is the subject of this work.
+(Functional Reactive Approach to Self-organization Programming) language
+\cite{FRASP}, which is the subject of this work.
 
-FRASP provides a novel domain-specific language for combining the functional
-reactive programming paradigm with the aggregate computing paradigm, extending
-the former to be applied in distributed systems and in particular in collective
-adaptive systems, while also extending the latter with a reactive computation
-model, replacing the typical round-based one.
+FRASP introduces a novel \ac{DSL} that combines the functional reactive
+programming paradigm with the aggregate computing para\-digm. This extension
+allows the application of the former in distributed systems, specifically in
+collective adaptive systems. Additionally, it improves the latter with an
+optimized reactive computation model, replacing the typical round-based one.
 
 At the time of writing, FRASP is a research project and there are many ideas,
 challenges, and features still to be explored. However, the language requires a
@@ -49,7 +47,7 @@ well.
 The content of this thesis will be presented in detail in the following
 chapters. First, Chapter \ref{chapter:background} provides an overview of the
 main concepts and technologies used in this project, so that this document may
-be self-contained. Then, Chapter \ref{chapter:analysis} analyses the objectives
+be self-contained. Then, Chapter \ref{chapter:analysis} analyzes the objectives
 and requirements of this thesis, defining an outline for the strategy to adopt.
 Afterwards, Chapter \ref{chapter:design} describes the solution designed for
 the project and Chapter \ref{chapter:implementation} delves into the details of

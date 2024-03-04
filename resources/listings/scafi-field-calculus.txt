@@ -1,4 +1,5 @@
 trait FieldCalculus:
+  // neighbors calculus
   def nbr[E](exp: => E): E
   def rep[E](exp: => E)(evolve: E => E): E
   def foldhood[E](exp: => E)(accumulate: (E, E) => E)(nbrExp: => E): E

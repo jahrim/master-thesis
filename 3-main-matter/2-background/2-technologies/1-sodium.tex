@@ -11,10 +11,10 @@ provides full compositionality compared to other implementations (e.g., Reactive
 Extensions (Rx)\footnote{Repository at: \url{https://github.com/ReactiveX}},
 which is not glitch-free) \cite{FRP}.
 
-In Sodium, behaviors are modelled as \textbf{cells} with denotation
-\texttt{Cell[V]}, indicating a time-varying value of type \texttt{V}, while
-event streams are modelled as simply \textbf{streams} with denotation
-\texttt{Stream[E]}, indicating a sequence of emissions of events of type
+In Sodium, behaviors are modeled as \textbf{cells}, denoted by
+\texttt{Cell[V]}, which indicates a time-varying value of type \texttt{V},
+while event streams are modeled as simply \textbf{streams}, denoted by
+\texttt{Stream[E]}, which indicates a sequence of emissions of events of type
 \texttt{E}. In particular, a \texttt{Stream} is defined as a list of events
 bound to the time when they were fired, while a \texttt{Cell} is defined as a
 pair of its initial value together with a \texttt{Stream} of its updates over
@@ -40,37 +40,37 @@ combining \texttt{Cell}s and \texttt{Stream}s. These include:
 \begin{itemize}
   \item \texttt{never}: create a new \texttt{Stream} that will never emit
         events.
-  \item \texttt{map}: given a \texttt{Stream} $s$ in input, create a new
-        \texttt{Stream} $s'$ whose events are the events of $s$ transformed
+  \item \texttt{map}: given a \texttt{Stream} $s$ in input, create an output
+        \texttt{Stream} $s'$, whose events are the events of $s$, transformed
         with a given \texttt{mapping} function. An analogous operation is
         provided for \texttt{Cell}s.
-  \item \texttt{filter}: given a \texttt{Stream} $s$ in input, create a new
-        \texttt{Stream} $s'$ whose events are the events of $s$, discarding
+  \item \texttt{filter}: given a \texttt{Stream} $s$ in input, create an output
+        \texttt{Stream} $s'$, whose events are the events of $s$, discarding
         those which do not satisfy a given \texttt{predicate}.
-  \item \texttt{merge}: given two \texttt{Stream}s $s_1$ and $s_2$, create a
-        new \texttt{Stream} $s'$ whose events are the events fired by either
-        $s_1$ or $s_2$, combining their simultaneous events with a given
-        \texttt{merging} function.
-  \item \texttt{snapshot}: given a \texttt{Stream} $s$ and a \texttt{Cell} $c$,
-        create a new \texttt{Stream} $s'$ whose events are the events of $s$
-        combined with the most recent value of $c$ using a given
+  \item \texttt{merge}: given two \texttt{Stream}s $s_1$ and $s_2$ in input,
+        create an output \texttt{Stream} $s'$, whose events are the events
+        fired by either $s_1$ or $s_2$, combining their simultaneous events
+        with a given \texttt{merging} function.
+  \item \texttt{snapshot}: given a \texttt{Stream} $s$ and a \texttt{Cell} $c$
+        in input, create an output \texttt{Stream} $s'$, whose events are the
+        events of $s$ combined with the most recent value of $c$ using a given
         \texttt{combine} function.
-  \item \texttt{constant}: create a \texttt{Cell} $c$ holding a given
+  \item \texttt{constant}: create an output \texttt{Cell} $c$, holding a given
         \texttt{value} forever.
-  \item \texttt{hold}: given a \texttt{Stream} $s$, create a \texttt{Cell} $c$
-        holding a given \texttt{initial} value, which is updated each time $s$
-        fires a new event. In particular, $s$ is the \texttt{Stream} of updates
-        of $c$.
-  \item \texttt{sample}: given a \texttt{Cell} $c$, obtain its most recent
-        value. This primitive should not be used when mapping or lifting
+  \item \texttt{hold}: given a \texttt{Stream} $s$ in input, create an output
+        \texttt{Cell} $c$, holding a given \texttt{initial} value, which is
+        updated each time $s$ fires a new event. In particular, $s$ is the
+        \texttt{Stream} of updates of $c$.
+  \item \texttt{sample}: given a \texttt{Cell} $c$ in input, obtain its most
+        recent value. This primitive should not be used when mapping or lifting
         \texttt{Cell}s as it would break referential transparence, which is
         preserved for other primitives by exploiting the immutability of
         transactional contexts.
-  \item \texttt{lift}: given two \texttt{Cell}s $c_1$ and $c_2$, create a new
-        \texttt{Cell} $c$ whose value is obtained by combining the values of
-        $c_1$ and $c_2$ using a given \texttt{operator}. In particular,
-        the value of $c$ is updated each time the values of $c_1$ or $c_2$ are
-        updated. Note that lifting is explicit in Sodium.
+  \item \texttt{lift}: given two \texttt{Cell}s $c_1$ and $c_2$ in input,
+        create an output \texttt{Cell} $c$, whose value is obtained by
+        combining the values of $c_1$ and $c_2$ using a given \texttt{operator}.
+        In particular, the value of $c$ is updated each time the values of
+        $c_1$ or $c_2$ are updated. Note that lifting is explicit in Sodium.
 \end{itemize}
 
 \lstinputlisting[
@@ -93,9 +93,9 @@ that is a \texttt{Cell} holding a reactive variable as value (either
 \texttt{Stream}s or other \texttt{Cell}s). In particular, two switching
 operators are implemented in Sodium (Listing \ref{listing:sodium-switching}):
 \texttt{switchS} builds a dynamic computational graph from a \texttt{Cell} of
-\texttt{Stream}s $c_s$, creating a new \texttt{Stream} $s'$ whose events are
-the events of the most recent \texttt{Stream} held by $c_s$; \texttt{switchC}
-works similarly for \texttt{Cell} of \texttt{Cell}s.
+\texttt{Stream}s $c_s$, creating an output \texttt{Stream} $s'$, whose events
+are the events of the most recent \texttt{Stream} held by $c_s$;
+\texttt{switchC} works similarly for \texttt{Cell} of \texttt{Cell}s.
 
 \lstinputlisting[
   language=Scala,
@@ -165,9 +165,9 @@ preserve compositionality.
 
 Additionally, Sodium offers other operational operators to tackle some specific
 practical problems (e.g., \texttt{value}, \texttt{updates}, \texttt{split},
-\texttt{defer}\dots) and many more helper primitives to facilitate the
+\texttt{defer}\dots) and many more higher-order primitives to facilitate the
 construction of computational graphs (e.g., \texttt{accum}, \texttt{collect},
-\texttt{sequence}, \texttt{gate}\dots). While these operators won't be
+\texttt{sequence}, \texttt{gate}\dots). While these operators will not be
 discussed here, since they are not as relevant for this project, more
 information about them and Sodium can be found in the book \cite{FRP}. The book
 also describes some helpful \ac{FRP} patterns, such as the \textbf{calming}
@@ -192,8 +192,8 @@ particular, Sodium promises to solve the following problems:
         deadlock due to synchronization. Sodium solves the problem by executing
         only one transaction at a time.
   \item \textit{Leaking callbacks}: forgetting to deregister a callback from
-        a producer causes memory leaks and wastes CPU time. Sodium
-        automatically deregisters callbacks that are not used any longer.
+        a producer causes memory leaks and unnecessary CPU time consumption.
+        Sodium automatically deregisters callbacks that are not used any longer.
   \item \textit{Accidental recursion}: it is easy to introduce accidental
         cyclic dependencies between nested callbacks. Sodium solves the problem
         using the declarativity of the \ac{FRP} paradigm.

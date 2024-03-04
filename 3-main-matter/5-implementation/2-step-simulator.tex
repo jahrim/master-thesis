@@ -9,7 +9,7 @@ described in Section \ref{section:design:step-simulation}.
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=1\textwidth]{resources/figures/step-simulator-class-diagram.png}
+  \includegraphics[width=1\textwidth]{resources/figures/diagrams/short/step-simulator-class-diagram.pdf}
   \caption[A UML class diagram of the step simulator]{
     A UML class diagram of the step simulator and its components.
   }
@@ -56,8 +56,8 @@ round-robin, in which each device is given the same chance to transmit its
 exports as long as they have some to transmit, guaranteeing fairness during the
 simulation.
 
-The \texttt{SimulationConfiguration} of a \texttt{StepSimulation} is modelled
-by the class \texttt{StepSimulationConfiguration}. In addition to the
+The \texttt{SimulationConfiguration} of a \texttt{StepSimulation} is modeled by
+the class \texttt{StepSimulationConfiguration}. In addition to the
 \texttt{Environment}, the configuration includes an \texttt{HaltPolicy}, which
 contains the logic for determining the end of the simulation. Some built-in
 \texttt{HaltPolicy}s are already defined in the corresponding simulator

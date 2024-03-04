@@ -6,6 +6,7 @@ class GradientTest extends AnyFlatSpec with Matchers with ConvergenceTest:
     extends ConvergenceSimulator.StepSimulator, WithIncarnation(Incarnation):
     override type Configuration[A] = StepSimulationConfiguration[A]
   import Simulator.incarnation.{*, given}
+  
   given configurationSupplier[A]: () => Simulator.Configuration[A] = () =>
     Simulator.StepSimulationConfiguration[A](
       environment = EnvironmentWithTags(euclideanGrid(cols = 5, rows = 5)).tag(

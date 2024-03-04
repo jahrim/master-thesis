@@ -9,21 +9,21 @@ aggregate \textbf{unit tests}, considering a FRASP construct as the
 specifications (i.e., combinations of FRASP constructs). Best practices
 \cite{UnitTesting} want unit tests to be:
 \begin{itemize}
-  \item \textit{simple}: easy to implement. Indeed, inserting complex logic in
+  \item \textit{Simple}: easy to implement. Indeed, inserting complex logic in
         a test requires such logic also to be tested, in order to ensure that
         the errors found by the test are not caused by faults in its logic.
         Moreover, simple tests can be easily understood, facilitating the
         detection of the cause of failure.
-  \item \textit{isolated}: independent of other unit tests (i.e., concerning
+  \item \textit{Isolated}: independent of other unit tests (i.e., concerning
         a single software unit). Dependencies between unit tests make it more
         difficult to detect the cause of failure.
-  \item \textit{reproducible}: always yielding the same results under the same
+  \item \textit{Reproducible}: always yielding the same results under the same
         initial conditions (i.e., \textit{determinism}). Non-determinism may
         cause a test to succeed under breaking changes or to fail even with
         no changes at all.
-  \item \textit{finite}: yielding a result in a limited amount of time, ideally
+  \item \textit{Finite}: yielding a result in a limited amount of time, ideally
         short for supporting frequent repeatability.
-  \item \textit{automated}: executed each time a relevant (preferably small)
+  \item \textit{Automated}: executed each time a relevant (preferably small)
         increment of software is completed.
 \end{itemize}
 
